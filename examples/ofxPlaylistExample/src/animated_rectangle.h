@@ -3,26 +3,27 @@
 
 /*
  *  animated_rectangle.h
- *  tig_animation
+ *  
  *
  *  Created by Timothy Gfrerer on 02/03/2011.
- *  Copyright 2011 __MyCompanyName__. All rights reserved.
+ *  Copyright 2011. All rights reserved.
  *
  */
 
-#include "animated_object.h"
+#include "ofxPlaylist.h"
 
 
-class AnimatedRectangle:public AnimatedObject {
+class AnimatedRectangle:public ofxPlaylist {
 public:
 	AnimatedRectangle(){		
 		pos=ofVec3f((ofGetWidth()-120)*ofRandomuf(),(ofGetHeight()-80)*ofRandomuf() ,0);
 		size=ofVec2f(120,80);
-		color=ofColor(ofRandomuf() * 255.,ofRandomuf() * 255., ofRandomuf() * 255., 255.);
+		color=ofFloatColor(ofRandomuf() * 255.,ofRandomuf() * 255., ofRandomuf() * 255., 255.);
+		angle = ofRandomuf() * 360.;
 	};
 	~AnimatedRectangle(){
 		// be a good lad and clean up after yourself.
-		AnimatedObject::cleanup();
+		ofxPlaylist::clear();
 	};
 	
 	void draw(){
@@ -43,14 +44,8 @@ public:
 		glPopMatrix();
 	}
 
-	void update(){
-		// ofLog(OF_LOG_VERBOSE, "Updating AnimatedRectangle");
-		// here's where the magic happens...
-		AnimatedObject::update();
-	};
-	
 	float angle;
-	ofColor	color;
+	ofFloatColor color;
 	ofVec3f pos;
 	ofVec2f	size;
 };
