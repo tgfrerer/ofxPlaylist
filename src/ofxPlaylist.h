@@ -59,11 +59,8 @@ namespace Playlist{
 
 	namespace Action {
 		
-		/* 
 		 // MARK: - Static Factory functions
-		 Factory functions. these allow you 
-		 
-		 */
+
 		template<class T>
 		static ofPtr<ofxEventKeyframe> event(T * _listener, string _message)
 		{
@@ -80,7 +77,7 @@ namespace Playlist{
 			if (_start == NULL )				// if no special _start pointer is given, the initialisation value of _pTweenTarget is 
 				_start = _pTweenTarget;			// taken to be _pTweenTarget at the moment the Tween gets executed the first time.
 												// otherwise the value pointed to by _start is used as initialisation value for _pTweenTarget
-												// the moment the Tween gets executed the first time.
+												// the moment the Tween gets executed for the first time.
 			
 			switch (tweenType) {
 				case TWEEN_LIN:
@@ -152,8 +149,8 @@ public:
 	void update();  
 	
 	
-	ofxPlaylist* addKeyFrame(ofPtr<ofxBaseKeyframe> _action);
-	ofxPlaylist* addToKeyFrame(ofPtr<ofxBaseKeyframe> _action);
+	ofxPlaylist& addKeyFrame(ofPtr<ofxBaseKeyframe> _action);
+	ofxPlaylist& addToKeyFrame(ofPtr<ofxBaseKeyframe> _action);
 	
 
 

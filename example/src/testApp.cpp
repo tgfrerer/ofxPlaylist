@@ -91,9 +91,12 @@ void testApp::mouseReleased(int x, int y, int button){
 	
 	pRect->playlist.addKeyFrame(Action::event(pRect,"START1"));
 	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->pos.y, ofRandomuf()*ofGetHeight(), TWEEN_QUAD, TWEEN_EASE_OUT));
-	pRect->playlist.addKeyFrame(Action::event(this,"START2"));
-	pRect->playlist.addKeyFrame(Action::event(this,"START3"));
-	pRect->playlist.addKeyFrame(Action::pause(100));
+
+	// chain syntax example
+	pRect->playlist.addKeyFrame(Action::event(this,"START2"))
+				   .addKeyFrame(Action::event(this,"START3"))
+				   .addKeyFrame(Action::pause(100));
+
 	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
 	pRect->playlist.addKeyFrame(Action::event(this,"START5"));
 	pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));

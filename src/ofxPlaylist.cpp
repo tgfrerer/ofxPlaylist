@@ -27,7 +27,7 @@ ofxEasingQuad	Playlist::tweenQuad;
 // ----------------------------------------------------------------------
 
 
-ofxPlaylist* ofxPlaylist::addKeyFrame(ofPtr<ofxBaseKeyframe> _action){
+ofxPlaylist& ofxPlaylist::addKeyFrame(ofPtr<ofxBaseKeyframe> _action){
 	// tim-debug: this function was leaking memory like a whole geriatric ward!
 	// no more. ofPtr to the rescue.
 
@@ -40,12 +40,12 @@ ofxPlaylist* ofxPlaylist::addKeyFrame(ofPtr<ofxBaseKeyframe> _action){
 	playlistBuffer.back()->push_back(_action);
 
 	anim_idle = FALSE;
-	return this;
+	return *this;
 }
 
 // ----------------------------------------------------------------------
 
-ofxPlaylist* ofxPlaylist::addToKeyFrame(ofPtr<ofxBaseKeyframe> _action){
+ofxPlaylist& ofxPlaylist::addToKeyFrame(ofPtr<ofxBaseKeyframe> _action){
 	// get the last element of the queue
 
 	if (_action->getDuration() > lastDuration) {
@@ -57,7 +57,7 @@ ofxPlaylist* ofxPlaylist::addToKeyFrame(ofPtr<ofxBaseKeyframe> _action){
 	//  add ofxKeyFrame to the list.
 	playlistBuffer.back()->push_back(_action);
 	anim_idle = FALSE;
-	return this;
+	return *this;
 }
 
 // ----------------------------------------------------------------------
