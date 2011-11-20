@@ -159,9 +159,8 @@
 			children = (
 				229B7E4214289BD200739DB0 /* src */,
 			);
-			name = ofxPlaylist;
-			path = of_oo7_stable/addons/ofxPlaylist;
-			sourceTree = SYSTEM_DEVELOPER_DIR;
+			path = ofxPlaylist;
+			sourceTree = "<group>";
 		};
 		229B7E4214289BD200739DB0 /* src */ = {
 			isa = PBXGroup;
@@ -208,8 +207,8 @@
 				229B7E6714289BDA00739DB0 /* ofxEasingSine.h */,
 			);
 			name = Easings;
-			path = of_oo7_stable/addons/ofxTween/src/Easings;
-			sourceTree = SYSTEM_DEVELOPER_DIR;
+			path = ../../ofxTween/src/Easings;
+			sourceTree = SOURCE_ROOT;
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
@@ -218,7 +217,8 @@
 				229B7E4114289BD200739DB0 /* ofxPlaylist */,
 			);
 			name = addons;
-			sourceTree = "<group>";
+			path = ../..;
+			sourceTree = SOURCE_ROOT;
 		};
 		BBAB23C913894ECA00AA2426 /* system frameworks */ = {
 			isa = PBXGroup;

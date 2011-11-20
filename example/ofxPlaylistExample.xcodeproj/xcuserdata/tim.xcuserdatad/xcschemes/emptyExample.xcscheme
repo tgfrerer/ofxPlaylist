@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "ofxPlaylistExampleDebug.app"
+               BuildableName = "ofxPlaylistExample.app"
                BlueprintName = "ofxPlaylistExample"
                ReferencedContainer = "container:ofxPlaylistExample.xcodeproj">
             </BuildableReference>
@@ -28,18 +28,29 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
+            BuildableName = "ofxPlaylistExample.app"
+            BlueprintName = "ofxPlaylistExample"
+            ReferencedContainer = "container:ofxPlaylistExample.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug">
+      buildConfiguration = "Debug"
+      debugDocumentVersioning = "YES"
+      allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxPlaylistExampleDebug.app"
+            BuildableName = "ofxPlaylistExample.app"
             BlueprintName = "ofxPlaylistExample"
             ReferencedContainer = "container:ofxPlaylistExample.xcodeproj">
          </BuildableReference>
@@ -51,12 +62,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release">
+      buildConfiguration = "Release"
+      debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxPlaylistExampleDebug.app"
+            BuildableName = "ofxPlaylistExample.app"
             BlueprintName = "ofxPlaylistExample"
             ReferencedContainer = "container:ofxPlaylistExample.xcodeproj">
          </BuildableReference>

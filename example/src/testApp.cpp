@@ -4,7 +4,7 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	ofSetLogLevel(OF_LOG_VERBOSE);
-	// ofSetFrameRate(25);
+	ofSetFrameRate(60);
 	
 	
 	ofxKeyframeAnimRegisterEvents(this);
