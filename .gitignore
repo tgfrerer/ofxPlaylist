@@ -1,3 +1,7 @@
 .DS_Store
 example/ofxPlaylistExample.xcodeproj/project.xcworkspace/xcuserdata/tim.xcuserdatad/UserInterfaceState.xcuserstate
 example/ofxPlaylistExample.xcodeproj/project.xcworkspace/xcuserdata/tim.xcuserdatad/UserInterfaceState.xcuserstate~HEAD
+example/bin/ofxPlaylistExampleDebug.app/Contents/Frameworks/
+example/bin/ofxPlaylistExampleDebug.app/Contents/MacOS/
+example/ofxPlaylistExample.xcodeproj/xcuserdata/tim.xcuserdatad/xcschemes/emptyExample.xcscheme~HEAD
+xcdebugger

@@ -23,13 +23,6 @@ for (int i=0; i<20; i++) {
 void testApp::update(){
 	vector<AnimatedRectangle *>::iterator it = animatedRectangles.begin();
 	
-//	while (it != animatedRectangles.end()) {
-//		// draw that Rectangle.
-//		(*it)->update();
-//		it++;
-//	}
-//			
-	// cout << animatedRectangles[0]->pos.x << endl;
 	
 	for (int i=0; i<20; i++) {
 		animatedRectangles[i]->update();	
@@ -41,7 +34,12 @@ void testApp::update(){
 }
 
 void testApp::onKeyframe(ofxPlaylistEventArgs& args){
-	ofLog(OF_LOG_VERBOSE) << "Keyframe Event: " << args.message << ": " << ofGetFrameNum();
+	
+	if (args.pSender == static_cast<void*>(this)){
+		// here you can be sure that the message was really intended for you.
+		ofLog(OF_LOG_VERBOSE) << "Keyframe Event: " << args.message << ": " << ofGetFrameNum();
+	}
+	
 }
 
 //--------------------------------------------------------------
