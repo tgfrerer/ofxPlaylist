@@ -53,9 +53,9 @@ enum TweenType{
 
 namespace Playlist{
 
-	extern ofxEasingLinear tweenLinear;
-	extern ofxEasingSine tweenSine;
-	extern ofxEasingQuad tweenQuad;
+	extern ofxEasingLinear  tweenLinear;
+	extern ofxEasingSine	tweenSine;
+	extern ofxEasingQuad	tweenQuad;
 
 	namespace Action {
 		

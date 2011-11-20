@@ -27,7 +27,14 @@
 class ofxPlaylistEventArgs : public ofEventArgs
 {
 public:
-    string message; 
+    string message;
+	void* pSender;
+
+	ofxPlaylistEventArgs()
+	:message("")
+	,pSender(NULL)
+	{};
+	
 };
 
 class ofxCoreKeyframeEvents
@@ -58,6 +65,7 @@ public:
 	ofxEventKeyframe(ListenerClass * listener, string _message){							// initialise with <#message#> .
 		is_idle = FALSE;     // bool value to give notice that the keyframe is done with.
 		message = _message;
+		pSender = static_cast<void *>(listener);
 	};
 
 	void start(){
@@ -69,6 +77,7 @@ public:
 		if (is_idle == FALSE) {
 			ofxPlaylistEventArgs keyframeEventArgs;
 			keyframeEventArgs.message = message;
+			keyframeEventArgs.pSender = pSender;
 			// ofxCoreKeyframeEvents Ev;
 			ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": EventKeyframe calling event, passing message: " << message ;
 			ofNotifyEvent(ofxKeyframeEvents.onKeyframe, keyframeEventArgs);
@@ -80,6 +89,7 @@ public:
 	
 private:
 	string message;
+	void* pSender;
 };
 
 

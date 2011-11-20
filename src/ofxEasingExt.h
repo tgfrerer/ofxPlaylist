@@ -17,16 +17,16 @@
 class ofxEasingExt: public ofxEasing {
 public:
 	
-	static float easeInS(void* me, float t,float b , float c, float d){
-		return ((ofxEasing*)me)->easeIn(t,b,c,d);
+	static float easeInS(ofxEasing* me, float t,float b , float c, float d){
+		return me->easeIn(t,b,c,d);
 	};
 	
-	static float easeOutS(void* me, float t,float b , float c, float d){
-		return ((ofxEasing*)me)->easeOut(t,b,c,d);
+	static float easeOutS(ofxEasing* me, float t,float b , float c, float d){
+		return me->easeOut(t,b,c,d);
 	};
 	
-	static float easeInOutS(void* me, float t,float b , float c, float d){
-		return ((ofxEasing*)me)->easeInOut(t,b,c,d);
+	static float easeInOutS(ofxEasing* me, float t,float b , float c, float d){
+		return me->easeInOut(t,b,c,d);
 	};
 	
 };

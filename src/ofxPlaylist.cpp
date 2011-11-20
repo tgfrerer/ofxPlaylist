@@ -20,11 +20,12 @@
 #include "ofxPlaylist.h"
 
 ofxEasingLinear Playlist::tweenLinear;				// 	declare global tween objects for tweeners
-ofxEasingSine Playlist::tweenSine;
-ofxEasingQuad Playlist::tweenQuad;
+ofxEasingSine	Playlist::tweenSine;
+ofxEasingQuad	Playlist::tweenQuad;
 
 
 // ----------------------------------------------------------------------
+
 
 ofxPlaylist* ofxPlaylist::addKeyFrame(ofPtr<ofxPlaylistAction> _action){
 	// tim-debug: this function was leaking memory like a whole geriatric ward!
@@ -134,7 +135,7 @@ void ofxPlaylist::clear(){
 		bShouldClear = false;
 		playlistMutex.unlock();
 	} else {
-		ofLog(OF_LOG_WARNING) << "playlist cannot be cleared currently. Activating soft-clear.";
+		ofLog(OF_LOG_NOTICE) << "playlist cannot be cleared currently. Activating soft-clear.";
 		bShouldClear = true;
 	}
 };
@@ -160,7 +161,7 @@ void ofxPlaylist::detach(){
 }
 
 // ----------------------------------------------------------------------
-// MARK: - private functions
+// MARK: - private methods
 
 bool ofxPlaylist::doNext(){
 	bool _r = TRUE;
