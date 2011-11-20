@@ -19,7 +19,7 @@
 
 #include "ofxPlaylist.h"
 
-ofxEasingLinear Playlist::tweenLinear;				// 	declare global tween objects for tweeners
+ofxEasingLinear Playlist::tweenLinear;				// 	declare global tween objects for ofxKeyframes
 ofxEasingSine	Playlist::tweenSine;
 ofxEasingQuad	Playlist::tweenQuad;
 
@@ -27,7 +27,7 @@ ofxEasingQuad	Playlist::tweenQuad;
 // ----------------------------------------------------------------------
 
 
-ofxPlaylist* ofxPlaylist::addKeyFrame(ofPtr<ofxPlaylistAction> _action){
+ofxPlaylist* ofxPlaylist::addKeyFrame(ofPtr<ofxBaseKeyframe> _action){
 	// tim-debug: this function was leaking memory like a whole geriatric ward!
 	// no more. ofPtr to the rescue.
 
@@ -45,7 +45,7 @@ ofxPlaylist* ofxPlaylist::addKeyFrame(ofPtr<ofxPlaylistAction> _action){
 
 // ----------------------------------------------------------------------
 
-ofxPlaylist* ofxPlaylist::addToKeyFrame(ofPtr<ofxPlaylistAction> _action){
+ofxPlaylist* ofxPlaylist::addToKeyFrame(ofPtr<ofxBaseKeyframe> _action){
 	// get the last element of the queue
 
 	if (_action->getDuration() > lastDuration) {
@@ -186,7 +186,7 @@ bool ofxPlaylist::doNext(){
 				return TRUE;
 			}
 
-			_r &= currentKeyframe[i]->is_idle;			// &= means, if even one of the result values is other than the initial _r value, _r will be false
+			_r &= currentKeyframe[i]->is_idle;			// &= means, if even one of the result values differs from the initial _r value, _r will be false
 		}
 		// make sure the caller of this function sets anim_idle to the return value _r!
 

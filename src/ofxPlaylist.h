@@ -33,7 +33,7 @@
 
 
 #include "ofMain.h"
-#include "tweener.h"
+#include "ofxKeyframe.h"
 #include "ofxEventKeyframe.h"
 #include <deque>
 
@@ -72,7 +72,7 @@ namespace Playlist{
 
 		
 		template <typename T>
-		static ofPtr<Tweener> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
+		static ofPtr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
 									const TweenType& tweenType = TWEEN_LIN, const TweenTransition& _tween_transition = TWEEN_EASE_IN_OUT, 
 									float* _start = NULL)
 		{
@@ -96,15 +96,15 @@ namespace Playlist{
 					break;
 			}
 			
-			return ofPtr<Tweener>(new Tweener(easingP, _pTweenTarget, _tween_transition, _start, _targetValue, _duration));
+			return ofPtr<ofxKeyframe>(new ofxKeyframe(easingP, _pTweenTarget, _tween_transition, _start, _targetValue, _duration));
 		};
 		
 		// ----------		
 		// allows int or float
 		template <typename T>
-		static ofPtr<Tweener> pause(T pause)
+		static ofPtr<ofxKeyframe> pause(T pause)
 		{
-			return ofPtr<Tweener>(new Tweener(pause));
+			return ofPtr<ofxKeyframe>(new ofxKeyframe(pause));
 		};
 		
 	}
@@ -115,7 +115,7 @@ namespace Playlist{
 
 class ofxPlaylist {
 public:
-	typedef vector<ofPtr<ofxPlaylistAction > > Keyframe;
+	typedef vector<ofPtr<ofxBaseKeyframe > > Keyframe;
 	bool anim_idle;              // whether the current ofxPlaylist is animating
     int duration;
 	
@@ -152,8 +152,8 @@ public:
 	void update();  
 	
 	
-	ofxPlaylist* addKeyFrame(ofPtr<ofxPlaylistAction> _action);
-	ofxPlaylist* addToKeyFrame(ofPtr<ofxPlaylistAction> _action);
+	ofxPlaylist* addKeyFrame(ofPtr<ofxBaseKeyframe> _action);
+	ofxPlaylist* addToKeyFrame(ofPtr<ofxBaseKeyframe> _action);
 	
 
 

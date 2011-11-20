@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		229B7E4B14289BD200739DB0 /* ofxEventKeyframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229B7E4414289BD200739DB0 /* ofxEventKeyframe.cpp */; };
 		229B7E4C14289BD200739DB0 /* ofxPlaylist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229B7E4614289BD200739DB0 /* ofxPlaylist.cpp */; };
-		229B7E4D14289BD200739DB0 /* tweener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229B7E4914289BD200739DB0 /* tweener.cpp */; };
+		229B7E4D14289BD200739DB0 /* ofxKeyframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229B7E4914289BD200739DB0 /* ofxKeyframe.cpp */; };
 		229B7E6814289BDA00739DB0 /* ofxEasing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229B7E5014289BDA00739DB0 /* ofxEasing.cpp */; };
 		229B7E6914289BDA00739DB0 /* ofxEasingBack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229B7E5214289BDA00739DB0 /* ofxEasingBack.cpp */; };
 		229B7E6A14289BDA00739DB0 /* ofxEasingBounce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229B7E5414289BDA00739DB0 /* ofxEasingBounce.cpp */; };
@@ -78,9 +78,9 @@
 		229B7E4514289BD200739DB0 /* ofxEventKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxEventKeyframe.h; sourceTree = "<group>"; };
 		229B7E4614289BD200739DB0 /* ofxPlaylist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxPlaylist.cpp; sourceTree = "<group>"; };
 		229B7E4714289BD200739DB0 /* ofxPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPlaylist.h; sourceTree = "<group>"; };
-		229B7E4814289BD200739DB0 /* ofxPlaylistAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPlaylistAction.h; sourceTree = "<group>"; };
-		229B7E4914289BD200739DB0 /* tweener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tweener.cpp; sourceTree = "<group>"; };
-		229B7E4A14289BD200739DB0 /* tweener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tweener.h; sourceTree = "<group>"; };
+		229B7E4814289BD200739DB0 /* ofxBaseKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBaseKeyframe.h; sourceTree = "<group>"; };
+		229B7E4914289BD200739DB0 /* ofxKeyframe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKeyframe.cpp; sourceTree = "<group>"; };
+		229B7E4A14289BD200739DB0 /* ofxKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKeyframe.h; sourceTree = "<group>"; };
 		229B7E4F14289BDA00739DB0 /* easing_terms_of_use.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = easing_terms_of_use.html; sourceTree = "<group>"; };
 		229B7E5014289BDA00739DB0 /* ofxEasing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxEasing.cpp; sourceTree = "<group>"; };
 		229B7E5114289BDA00739DB0 /* ofxEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxEasing.h; sourceTree = "<group>"; };
@@ -170,9 +170,9 @@
 				229B7E4514289BD200739DB0 /* ofxEventKeyframe.h */,
 				229B7E4614289BD200739DB0 /* ofxPlaylist.cpp */,
 				229B7E4714289BD200739DB0 /* ofxPlaylist.h */,
-				229B7E4814289BD200739DB0 /* ofxPlaylistAction.h */,
-				229B7E4914289BD200739DB0 /* tweener.cpp */,
-				229B7E4A14289BD200739DB0 /* tweener.h */,
+				229B7E4814289BD200739DB0 /* ofxBaseKeyframe.h */,
+				229B7E4914289BD200739DB0 /* ofxKeyframe.cpp */,
+				229B7E4A14289BD200739DB0 /* ofxKeyframe.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -385,7 +385,7 @@
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				229B7E4B14289BD200739DB0 /* ofxEventKeyframe.cpp in Sources */,
 				229B7E4C14289BD200739DB0 /* ofxPlaylist.cpp in Sources */,
-				229B7E4D14289BD200739DB0 /* tweener.cpp in Sources */,
+				229B7E4D14289BD200739DB0 /* ofxKeyframe.cpp in Sources */,
 				229B7E6814289BDA00739DB0 /* ofxEasing.cpp in Sources */,
 				229B7E6914289BDA00739DB0 /* ofxEasingBack.cpp in Sources */,
 				229B7E6A14289BDA00739DB0 /* ofxEasingBounce.cpp in Sources */,

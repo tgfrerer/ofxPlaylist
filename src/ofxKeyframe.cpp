@@ -1,5 +1,5 @@
 /*
- *  tweener.cpp
+ *  ofxKeyframe.cpp
  *
  *
  *                                                   ____         ___                __      __      
@@ -17,11 +17,11 @@
  *  Copyright 2010 ponies & light. All rights reserved.
  */
 
-#include "tweener.h"
+#include "ofxKeyframe.h"
 #include "ofxEasingExt.h"
 
-void Tweener::initTweener(){
-	ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": new tweener();";
+void ofxKeyframe::initofxKeyframe(){
+	ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": new ofxKeyframe();";
 	is_idle = FALSE;     
 	pTweenTarget = NULL;
 	hasStarted = FALSE;
@@ -29,33 +29,33 @@ void Tweener::initTweener(){
 }
 
 // frame-based
-Tweener::Tweener(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float* _start, const float& _end, const int& _frames){
+ofxKeyframe::ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float* _start, const float& _end, const int& _frames){
 	easingP = _easingP;
-	initTweener();
+	initofxKeyframe();
 	setup(_pTweenTarget, _tween_transition, _start, _end, _frames);
 	isFrameBased = true;
 }
 
 //time-based (ms)
-Tweener::Tweener(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float* _start, const float& _end, const float& _millisecs){
+ofxKeyframe::ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float* _start, const float& _end, const float& _millisecs){
 	easingP = _easingP;
-	initTweener();
+	initofxKeyframe();
 	setup(_pTweenTarget, _tween_transition, _start, _end, _millisecs);
 	isFrameBased = false;
 }
 
 // frame-based
-Tweener::Tweener(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const int& _frames){
+ofxKeyframe::ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const int& _frames){
 	easingP = _easingP;
-	initTweener();
+	initofxKeyframe();
 	setup(_pTweenTarget, _tween_transition, _pTweenTarget, _end, _frames);
 	isFrameBased = true;
 }
 
 //time-based (ms)
-Tweener::Tweener(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const float& _millisecs){
+ofxKeyframe::ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const float& _millisecs){
 	easingP = _easingP;
-	initTweener();
+	initofxKeyframe();
 	setup(_pTweenTarget, _tween_transition, _pTweenTarget, _end, _millisecs);
 	isFrameBased = false;
 }
@@ -63,27 +63,24 @@ Tweener::Tweener(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransiti
 
 // this only for TWEEN_PAUSE
 // frame-based
-Tweener::Tweener(const int& _frames){
+ofxKeyframe::ofxKeyframe(const int& _frames){
 	easingP = NULL;
-	initTweener();
+	initofxKeyframe();
 	setup(NULL, TWEEN_PAUSE, NULL, 0, _frames);
 	isFrameBased = true;
 }
 //time-based (ms)
-Tweener::Tweener(const float& _millisecs){
+ofxKeyframe::ofxKeyframe(const float& _millisecs){
 	easingP = NULL;
-	initTweener();
+	initofxKeyframe();
 	setup(NULL, TWEEN_PAUSE, NULL, 0, _millisecs);
 	isFrameBased = false;
 }
 
 
-Tweener::~Tweener(){
-	ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": ~tweener();";
-}
 
-void Tweener::start(){
-	ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": tweener start";
+void ofxKeyframe::start(){
+	ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": ofxKeyframe start";
 	is_idle = FALSE;
 	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTime();
 	step = 0;
@@ -93,7 +90,7 @@ void Tweener::start(){
 		start_pos = *start_pos_p;
 }
 
-void Tweener::setup(float * _pTweenTarget, const TweenTransition& _tween_transition,  float* _start, const float& _end, const int& _steps)
+void ofxKeyframe::setup(float * _pTweenTarget, const TweenTransition& _tween_transition,  float* _start, const float& _end, const int& _steps)
 {
 	start_pos_p = _start;
 	end_pos = _end;
@@ -104,7 +101,7 @@ void Tweener::setup(float * _pTweenTarget, const TweenTransition& _tween_transit
 	tween_transition = _tween_transition;
 };
 
-void Tweener::execute(){
+void ofxKeyframe::execute(){
 	if (((pTweenTarget != NULL) && (is_idle == FALSE)) || (tween_transition==TWEEN_PAUSE)) {
 		
 		if (hasStarted == FALSE) start();

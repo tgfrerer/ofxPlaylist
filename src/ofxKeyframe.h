@@ -1,8 +1,8 @@
-#ifndef GUARD_TWEENER
-#define GUARD_TWEENER
+#ifndef GUARD_ofxKeyframe
+#define GUARD_ofxKeyframe
 
 /*
- *  tweener.h
+ *  ofxKeyframe.h
  *
  *
  *                                                   ____         ___                __      __      
@@ -24,23 +24,25 @@
 
 #include "ofMain.h"
 
-#include "ofxPlaylistAction.h"
+#include "ofxBaseKeyframe.h"
 #include "ofxEasingExt.h"
 
-class Tweener : public ofxPlaylistAction {
+class ofxKeyframe : public ofxBaseKeyframe {
 public:
 	
-	Tweener(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const int& _frames);
-	Tweener(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const float& _millisecs);
+	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const int& _frames);
+	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const float& _millisecs);
 
-	Tweener(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _frames);
-	Tweener(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const float& _millisecs);
+	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _frames);
+	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const float& _millisecs);
 
 	// Pause
-	Tweener(const int& _frames);
-	Tweener(const float& _millisecs);
+	explicit ofxKeyframe(const int& _frames);
+	explicit ofxKeyframe(const float& _millisecs);
 
-	~Tweener();
+	~ofxKeyframe(){
+		ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": ~ofxKeyframe();";
+	};
 	
 	// bool value to give notice that the tween has finished.
 	// bool is_idle;  
@@ -57,7 +59,7 @@ private:
 	
 	ofxEasing* easingP;
 	
-	void initTweener();
+	void initofxKeyframe();
 	void setup(float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _steps);
 	
 	// variables you need to save for every tween

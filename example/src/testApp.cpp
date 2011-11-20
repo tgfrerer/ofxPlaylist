@@ -99,11 +99,11 @@ void testApp::mouseReleased(int x, int y, int button){
 	pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));
 	pRect->playlist.addKeyFrame(Action::event(this,"END"));
 
-//	// then a delicate change colour change.
+	// then a delicate colour change.
 
-	//	animatedRectangles[index]->addNewKeyFrame(new Tweener(&quadE, &animatedRectangles[index]->color.r, TWEEN_EASE_IN_OUT, &animatedRectangles[index]->color.r, ofRandomuf()*255.f, 20));
-	//	animatedRectangles[index]->addToKeyFrame(new Tweener(&sinE, &animatedRectangles[index]->color.g, TWEEN_EASE_IN_OUT, &animatedRectangles[index]->color.g, ofRandomuf()*255.f, 20));
-	//	animatedRectangles[index]->addToKeyFrame(new Tweener(&sinE, &animatedRectangles[index]->color.b, TWEEN_EASE_OUT, &animatedRectangles[index]->color.b, ofRandomuf()*255.f, 20));
+	//	animatedRectangles[index]->addNewKeyFrame(new ofxKeyframe(&quadE, &animatedRectangles[index]->color.r, TWEEN_EASE_IN_OUT, &animatedRectangles[index]->color.r, ofRandomuf()*255.f, 20));
+	//	animatedRectangles[index]->addToKeyFrame(new ofxKeyframe(&sinE, &animatedRectangles[index]->color.g, TWEEN_EASE_IN_OUT, &animatedRectangles[index]->color.g, ofRandomuf()*255.f, 20));
+	//	animatedRectangles[index]->addToKeyFrame(new ofxKeyframe(&sinE, &animatedRectangles[index]->color.b, TWEEN_EASE_OUT, &animatedRectangles[index]->color.b, ofRandomuf()*255.f, 20));
 	//	animatedRectangles[index]->addNewKeyFrame(new EventKeyframe(this,"LAST"));
 
 	ofLog(OF_LOG_VERBOSE) << "Duration: " << animatedRectangles[index]->playlist.duration;

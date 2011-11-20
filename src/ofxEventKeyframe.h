@@ -21,7 +21,7 @@
  */
 
 #include "ofMain.h"
-#include "ofxPlaylistAction.h"
+#include "ofxBaseKeyframe.h"
 
 
 
@@ -77,7 +77,7 @@ void ofxKeyframeAnimUnRegisterEvents(ListenerClass * listener){
 
 // ------------------------------------
 
-class ofxEventKeyframe : public ofxPlaylistAction {
+class ofxEventKeyframe : public ofxBaseKeyframe {
 public:
 	
 	template<class ListenerClass>

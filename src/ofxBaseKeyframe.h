@@ -1,8 +1,8 @@
-#ifndef GUARD_OFXPLAYLISTACTION
-#define GUARD_OFXPLAYLISTACTION
+#ifndef GUARD_ofxBaseKeyframe
+#define GUARD_ofxBaseKeyframe
 
 /*
- *  ofxPlaylistAction.h
+ *  ofxBaseKeyframe.h
  *
  *
  *                                                   ____         ___                __      __      
@@ -30,10 +30,10 @@ enum TweenTransition{
 };
 
 
-class ofxPlaylistAction {
+class ofxBaseKeyframe {
 public:
-	ofxPlaylistAction(){};
-	virtual ~ofxPlaylistAction(){ 
+	ofxBaseKeyframe(){};
+	virtual ~ofxBaseKeyframe(){ 
 		ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": ~ofxKeyFrame();";
 	};     // by calling this function virtual I make sure to call the destructor for 
 		   // the derived class - and not for the parent class!
