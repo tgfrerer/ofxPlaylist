@@ -38,7 +38,5 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		void onKeyframe(ofxPlaylistEventArgs& args);
 		
-	AnimatedRectangle eins;
-	
 	vector<AnimatedRectangle *> animatedRectangles;
 };

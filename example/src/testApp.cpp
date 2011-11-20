@@ -11,7 +11,8 @@ void testApp::setup(){
 	
 for (int i=0; i<20; i++) {
 	animatedRectangles.push_back(new AnimatedRectangle());
-	// animatedRectangles[i]->attach();	
+	// animatedRectangles[i]->playlist.attach();	
+	ofxKeyframeAnimRegisterEvents(animatedRectangles[i]);
 
 }	
 	
@@ -23,23 +24,20 @@ for (int i=0; i<20; i++) {
 void testApp::update(){
 	vector<AnimatedRectangle *>::iterator it = animatedRectangles.begin();
 	
-	
 	for (int i=0; i<20; i++) {
-		animatedRectangles[i]->update();	
+		animatedRectangles[i]->playlist.update();	
 	}	
 
-	
-	eins.draw();
-	
 }
 
 void testApp::onKeyframe(ofxPlaylistEventArgs& args){
+
+	// this check is only necessary if you want to be absolutely sure that 
+	// the onKeyFrame Event was sent by the same object as the receiver.
+	if (args.pSender != static_cast<void*>(this)) return;
 	
-	if (args.pSender == static_cast<void*>(this)){
-		// here you can be sure that the message was really intended for you.
-		ofLog(OF_LOG_VERBOSE) << "Keyframe Event: " << args.message << ": " << ofGetFrameNum();
-	}
-	
+	ofLog(OF_LOG_VERBOSE) << "Keyframe Event received for (" << args.pSender << "): " << args.message << ": " << ofGetFrameNum();
+
 }
 
 //--------------------------------------------------------------
@@ -91,15 +89,15 @@ void testApp::mouseReleased(int x, int y, int button){
 
 	AnimatedRectangle * pRect = animatedRectangles[index];
 	
-	pRect->addKeyFrame(Action::event(this,"START1"));
-	pRect->addKeyFrame(Action::tween(100, &pRect->pos.y, ofRandomuf()*ofGetHeight(), TWEEN_QUAD, TWEEN_EASE_OUT));
-	pRect->addKeyFrame(Action::event(this,"START2"));
-	pRect->addKeyFrame(Action::event(this,"START3"));
-	pRect->addKeyFrame(Action::pause(100));
-	pRect->addKeyFrame(Action::tween(100, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
-	pRect->addKeyFrame(Action::event(this,"START5"));
-	pRect->addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));
-	pRect->addKeyFrame(Action::event(this,"END"));
+	pRect->playlist.addKeyFrame(Action::event(pRect,"START1"));
+	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->pos.y, ofRandomuf()*ofGetHeight(), TWEEN_QUAD, TWEEN_EASE_OUT));
+	pRect->playlist.addKeyFrame(Action::event(this,"START2"));
+	pRect->playlist.addKeyFrame(Action::event(this,"START3"));
+	pRect->playlist.addKeyFrame(Action::pause(100));
+	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
+	pRect->playlist.addKeyFrame(Action::event(this,"START5"));
+	pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));
+	pRect->playlist.addKeyFrame(Action::event(this,"END"));
 
 //	// then a delicate change colour change.
 
@@ -108,7 +106,7 @@ void testApp::mouseReleased(int x, int y, int button){
 	//	animatedRectangles[index]->addToKeyFrame(new Tweener(&sinE, &animatedRectangles[index]->color.b, TWEEN_EASE_OUT, &animatedRectangles[index]->color.b, ofRandomuf()*255.f, 20));
 	//	animatedRectangles[index]->addNewKeyFrame(new EventKeyframe(this,"LAST"));
 
-	ofLog(OF_LOG_VERBOSE) << "Duration: " << animatedRectangles[index]->duration;
+	ofLog(OF_LOG_VERBOSE) << "Duration: " << animatedRectangles[index]->playlist.duration;
 	
 
 }

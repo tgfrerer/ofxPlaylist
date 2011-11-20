@@ -13,8 +13,10 @@
 #include "ofxPlaylist.h"
 
 
-class AnimatedRectangle:public ofxPlaylist {
+class AnimatedRectangle {
 public:
+	ofxPlaylist playlist;
+	
 	AnimatedRectangle(){		
 		pos=ofVec3f((ofGetWidth()-120)*ofRandomuf(),(ofGetHeight()-80)*ofRandomuf() ,0);
 		size=ofVec2f(120,80);
@@ -23,7 +25,7 @@ public:
 	};
 	~AnimatedRectangle(){
 		// be a good lad and clean up after yourself.
-		ofxPlaylist::clear();
+		playlist.clear();
 	};
 	
 	void draw(){
@@ -44,6 +46,16 @@ public:
 		glPopMatrix();
 	}
 
+	void onKeyframe(ofxPlaylistEventArgs& args){
+		
+		// this check is only necessary if you want to be absolutely sure that 
+		// the onKeyFrame Event was sent by the same object as the receiver.
+		if (args.pSender != static_cast<void*>(this)) return;
+		
+		ofLog(OF_LOG_VERBOSE) << "Animated Rectangle: Keyframe Event received for (" << args.pSender << "): " << args.message << ": " << ofGetFrameNum();
+		
+	}
+	
 	float angle;
 	ofFloatColor color;
 	ofVec3f pos;

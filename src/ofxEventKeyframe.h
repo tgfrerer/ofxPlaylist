@@ -24,6 +24,25 @@
 #include "ofxPlaylistAction.h"
 
 
+
+/*	
+ 
+ // Example onKeyFrame method:
+ 
+ void testApp::onKeyframe(ofxPlaylistEventArgs& args){
+ 
+ // this check is only necessary if you want to be absolutely sure that 
+ // the onKeyFrame Event was sent by the same object as the receiver.
+ if (args.pSender != static_cast<void*>(this)) return;
+ 
+ ofLog(OF_LOG_VERBOSE) << "Keyframe Event received for (" << args.pSender << "): " << args.message << ": " << ofGetFrameNum();
+ 
+ }
+ 
+ */
+
+
+
 class ofxPlaylistEventArgs : public ofEventArgs
 {
 public:
@@ -65,7 +84,7 @@ public:
 	ofxEventKeyframe(ListenerClass * listener, string _message){							// initialise with <#message#> .
 		is_idle = FALSE;     // bool value to give notice that the keyframe is done with.
 		message = _message;
-		pSender = static_cast<void *>(listener);
+		pSender = listener;
 	};
 
 	void start(){

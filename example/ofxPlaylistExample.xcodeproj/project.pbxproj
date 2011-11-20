@@ -207,8 +207,8 @@
 				229B7E6714289BDA00739DB0 /* ofxEasingSine.h */,
 			);
 			name = Easings;
-			path = ../../ofxTween/src/Easings;
-			sourceTree = SOURCE_ROOT;
+			path = ofxTween/src/Easings;
+			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
