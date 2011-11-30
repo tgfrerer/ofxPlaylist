@@ -101,19 +101,16 @@ namespace Playlist {
 			// 1. find out where y value would be after one second
 			// 3. see where the value would on (influence percent) down the x-axis
 			
-			float scaledInSpeed = inSpeed * duration * getInInfluence() / 1000.f;
-			float scaledOutSpeed = outSpeed * duration * getOutInfluence() /1000.f;
+			float scaledInSpeed = (inSpeed * duration * getInInfluence()) / 1000.f;
+			float scaledOutSpeed = (outSpeed * duration * getOutInfluence()) /1000.f;
 			
 			// speed values are relative, which is why we add the current in/out y-values to the
 			// relative speed value to calculate the bezier curve tangent handles.
 
-			if (p1.y<p2.y){
-				pc1.y = p1.y+scaledInSpeed;
-				pc2.y = p2.y-scaledOutSpeed;
-			} else {
-				pc1.y = p1.y-scaledInSpeed;
-				pc2.y = p2.y+scaledOutSpeed;
-			}
+
+
+			(p1.y > 0 ) ? pc1.y = p1.y + scaledInSpeed : pc1.y = p1.y - scaledInSpeed;
+			(p2.y > 0 ) ? pc2.y = p2.y-scaledOutSpeed : pc2.y = p2.y + scaledOutSpeed;
 		}
 
 	};
