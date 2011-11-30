@@ -33,7 +33,7 @@ void ofxKeyframe::initofxKeyframe(){
 // bezier curve based
 
 // by-frame:
-ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, const float& _end, const int& _frames){
+ofxKeyframe::ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const int& _frames){
 	easingP = NULL;
 	pEasingC = _easingC;
 	initofxKeyframe();
@@ -43,7 +43,7 @@ ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenT
 }
 
 // by-time:
-ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, const float& _end, const float& _millisecs){
+ofxKeyframe::ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const float& _millisecs){
 	easingP = NULL;
 	pEasingC = _easingC;
 	initofxKeyframe();
@@ -53,7 +53,7 @@ ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenT
 }
 
 // by-frame:
-ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, float* _start, const float& _end, const int& _frames){
+ofxKeyframe::ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float* _start, const float& _end, const int& _frames){
 	easingP = NULL;
 	pEasingC = _easingC;
 	initofxKeyframe();
@@ -63,7 +63,7 @@ ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenT
 }
 
 // by-time:
-ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, float* _start, const float& _end, const float& _millisecs){
+ofxKeyframe::ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float* _start, const float& _end, const float& _millisecs){
 	easingP = NULL;
 	pEasingC = _easingC;
 	initofxKeyframe();
@@ -138,10 +138,12 @@ void ofxKeyframe::start(){
 
 	if (isBezierCurveBased){
 		// initalise the bezier curve...
-		pEasingC->p1.set(0.f,*start_pos_p);
-		pEasingC->pc1 = ofVec2f(0.f,(*start_pos_p)) - pEasingC->pc1;
-		pEasingC->pc2 = ofVec2f(0.f,end_pos) - pEasingC->pc2;
-		pEasingC->p2.set(1.f,end_pos);
+		pEasingC->setIn(*start_pos_p);
+		pEasingC->setOut(end_pos);
+		
+		if (!isFrameBased)
+			pEasingC->setup(steps);
+		else pEasingC->setup((steps / (float)ofGetFrameRate())*1000); 
 	}
 }
 
@@ -179,7 +181,7 @@ void ofxKeyframe::execute(){
 			_r = 0.0;
 
 			if (isBezierCurveBased)
-				_r = ofBezierPoint(pEasingC->p1, pEasingC->pc1, pEasingC->pc2, pEasingC->p2 , step/(float)steps).y;
+				_r = pEasingC->getAt(step/(float)steps);
 			else
 			switch (tween_transition) {
 				case TWEEN_EASE_IN:

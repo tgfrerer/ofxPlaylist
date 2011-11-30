@@ -100,7 +100,7 @@ namespace Playlist{
 		
 		template <typename T>
 		static ofPtr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
-										const ofPtr<easingCurve> _easingCurve, 
+										const ofPtr<BezierTween> _BezierTween, 
 										float* _start = NULL)
 		{
 			ofxEasing* easingP = NULL;
@@ -109,7 +109,7 @@ namespace Playlist{
 												// otherwise the value pointed to by _start is used as initialisation value for _pTweenTarget
 												// the moment the Tween gets executed for the first time.
 			
-			return ofPtr<ofxKeyframe>(new ofxKeyframe(_easingCurve, _pTweenTarget, _start, _targetValue, _duration));
+			return ofPtr<ofxKeyframe>(new ofxKeyframe(_BezierTween, _pTweenTarget, _start, _targetValue, _duration));
 		};
 
 		

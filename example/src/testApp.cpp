@@ -95,17 +95,22 @@ void testApp::mouseReleased(int x, int y, int button){
 	// chain syntax example
 	pRect->playlist.addKeyFrame(Action::event(this,"START2"))
 				   .addKeyFrame(Action::event(this,"START3"))
-				   .addKeyFrame(Action::pause(100));
+				   .addKeyFrame(Action::pause(0));
 
 	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
 	pRect->playlist.addKeyFrame(Action::event(this,"START5"));
-	//pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));
+	// pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));
 
 	// let's use funky bezier curves!
-	easingCurve * eC = new easingCurve();
-	eC->pc1.set(1.0, 0);		// you only have to set two control points.
-	eC->pc2.set(0.9, 0);
-	pRect->playlist.addKeyFrame(Action::tween(1000.f, &pRect->angle,  ofRandomuf()*360, ofPtr<easingCurve>(eC)));
+	BezierTween * eC = new BezierTween();
+
+	eC->setInSpeed(120);			// you set the speed in units / second 
+	eC->setInInfluence(.10);		// you only have to set two control points.
+
+	eC->setOutSpeed(8700.0);
+	eC->setOutInfluence(0.002);
+
+	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->angle,   ofRandomuf()*360, ofPtr<BezierTween>(eC)));
 	pRect->playlist.addKeyFrame(Action::event(this,"END"));
 
 	
