@@ -48,6 +48,11 @@ ofxPlaylist& ofxPlaylist::addKeyFrame(ofPtr<ofxBaseKeyframe> _action){
 ofxPlaylist& ofxPlaylist::addToKeyFrame(ofPtr<ofxBaseKeyframe> _action){
 	// get the last element of the queue
 
+	if (playlistBuffer.empty()){
+		// if there is no previous keyframe to attach to, add a new keyframe.
+		return addKeyFrame(_action);
+	}
+	
 	if (_action->getDuration() > lastDuration) {
 		duration -= lastDuration;	// take away the smaller value from the total
 		lastDuration = _action->getDuration();

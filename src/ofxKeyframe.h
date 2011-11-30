@@ -27,6 +27,19 @@
 #include "ofxBaseKeyframe.h"
 #include "ofxEasingExt.h"
 
+namespace Playlist {
+	struct easingCurve {
+		// this describes a cubic bezier curve, 
+		// we assume a normalised x coordinate (p2.x - p1.x == 1.f, p1.x == 0)
+		ofVec2f p1;
+		ofVec2f pc1;
+		ofVec2f pc2;
+		ofVec2f p2;
+		
+	};
+}
+
+
 class ofxKeyframe : public ofxBaseKeyframe {
 public:
 	
@@ -36,6 +49,15 @@ public:
 	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _frames);
 	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const float& _millisecs);
 
+	// bezier curve
+	
+	ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, const float& _end, const int& _frames);
+	ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, const float& _end, const float& _millisecs);
+
+	ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, float * _start, const float& _end, const int& _frames);
+	ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, float * _start, const float& _end, const float& _millisecs);
+	
+	
 	// Pause
 	explicit ofxKeyframe(const int& _frames);
 	explicit ofxKeyframe(const float& _millisecs);
@@ -55,9 +77,14 @@ public:
 	int getDuration(){return steps;};
 
 private:
+	
+	ofxKeyframe(){};	// just to make sure no-one calls this implicitly.
+	
 	bool isFrameBased;
+	bool isBezierCurveBased;
 	
 	ofxEasing* easingP;
+	ofPtr<Playlist::easingCurve> pEasingC;
 	
 	void initofxKeyframe();
 	void setup(float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _steps);

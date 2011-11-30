@@ -43,15 +43,14 @@
 #include "ofxEasingSine.h"
 #include "ofxEasingQuad.h"
 
-enum TweenType{
-	TWEEN_LIN,
-	TWEEN_QUAD,
-	TWEEN_SIN
-};
-
- 
-
 namespace Playlist{
+
+	enum TweenType{
+		TWEEN_LIN,
+		TWEEN_QUAD,
+		TWEEN_SIN,
+		TWEEN_BEZIER
+	};
 
 	extern ofxEasingLinear  tweenLinear;
 	extern ofxEasingSine	tweenSine;
@@ -95,9 +94,27 @@ namespace Playlist{
 			
 			return ofPtr<ofxKeyframe>(new ofxKeyframe(easingP, _pTweenTarget, _tween_transition, _start, _targetValue, _duration));
 		};
+
+		// ------- 
+		// bezier curve based:
+		
+		template <typename T>
+		static ofPtr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
+										const ofPtr<easingCurve> _easingCurve, 
+										float* _start = NULL)
+		{
+			ofxEasing* easingP = NULL;
+			if (_start == NULL )				// if no special _start pointer is given, the initialisation value of _pTweenTarget is 
+				_start = _pTweenTarget;			// taken to be _pTweenTarget at the moment the Tween gets executed the first time.
+												// otherwise the value pointed to by _start is used as initialisation value for _pTweenTarget
+												// the moment the Tween gets executed for the first time.
+			
+			return ofPtr<ofxKeyframe>(new ofxKeyframe(_easingCurve, _pTweenTarget, _start, _targetValue, _duration));
+		};
+
 		
 		// ----------		
-		// allows int or float
+		// allows int or float, but does no checks for other, more exotic types, so be careful.
 		template <typename T>
 		static ofPtr<ofxKeyframe> pause(T pause)
 		{
@@ -158,6 +175,7 @@ public:
 	// -----------------------------------------------------------------------------
 	// MARK: Private methods
 private:
+	
 	ofMutex playlistMutex;
 	deque<ofPtr<Keyframe> > playlist;
 	deque<ofPtr<Keyframe> > playlistBuffer;

@@ -5,7 +5,7 @@
 void testApp::setup(){
 	ofSetLogLevel(OF_LOG_VERBOSE);
 	ofSetFrameRate(60);
-	
+	ofSetVerticalSync(TRUE);
 	
 	ofxKeyframeAnimRegisterEvents(this);
 	
@@ -99,15 +99,16 @@ void testApp::mouseReleased(int x, int y, int button){
 
 	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
 	pRect->playlist.addKeyFrame(Action::event(this,"START5"));
-	pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));
+	//pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));
+
+	// let's use funky bezier curves!
+	easingCurve * eC = new easingCurve();
+	eC->pc1.set(1.0, 0);		// you only have to set two control points.
+	eC->pc2.set(0.9, 0);
+	pRect->playlist.addKeyFrame(Action::tween(1000.f, &pRect->angle,  ofRandomuf()*360, ofPtr<easingCurve>(eC)));
 	pRect->playlist.addKeyFrame(Action::event(this,"END"));
 
-	// then a delicate colour change.
-
-	//	animatedRectangles[index]->addNewKeyFrame(new ofxKeyframe(&quadE, &animatedRectangles[index]->color.r, TWEEN_EASE_IN_OUT, &animatedRectangles[index]->color.r, ofRandomuf()*255.f, 20));
-	//	animatedRectangles[index]->addToKeyFrame(new ofxKeyframe(&sinE, &animatedRectangles[index]->color.g, TWEEN_EASE_IN_OUT, &animatedRectangles[index]->color.g, ofRandomuf()*255.f, 20));
-	//	animatedRectangles[index]->addToKeyFrame(new ofxKeyframe(&sinE, &animatedRectangles[index]->color.b, TWEEN_EASE_OUT, &animatedRectangles[index]->color.b, ofRandomuf()*255.f, 20));
-	//	animatedRectangles[index]->addNewKeyFrame(new EventKeyframe(this,"LAST"));
+	
 
 	ofLog(OF_LOG_VERBOSE) << "Duration: " << animatedRectangles[index]->playlist.duration;
 	

@@ -16,7 +16,7 @@
 
 class ofxEasingExt: public ofxEasing {
 public:
-	
+	//  easing*, step, start_pos , end_pos-start_pos, steps
 	static float easeInS(ofxEasing* me, float t,float b , float c, float d){
 		return me->easeIn(t,b,c,d);
 	};

@@ -25,8 +25,55 @@ void ofxKeyframe::initofxKeyframe(){
 	is_idle = FALSE;     
 	pTweenTarget = NULL;
 	hasStarted = FALSE;
+	isBezierCurveBased = FALSE;
 	step = 0;
 }
+
+
+// bezier curve based
+
+// by-frame:
+ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, const float& _end, const int& _frames){
+	easingP = NULL;
+	pEasingC = _easingC;
+	initofxKeyframe();
+	setup(_pTweenTarget, TWEEN_EASE_IN_OUT, _pTweenTarget, _end, _frames);
+	isFrameBased = TRUE;
+	isBezierCurveBased = TRUE;
+}
+
+// by-time:
+ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, const float& _end, const float& _millisecs){
+	easingP = NULL;
+	pEasingC = _easingC;
+	initofxKeyframe();
+	setup(_pTweenTarget, TWEEN_EASE_IN_OUT, _pTweenTarget, _end, _millisecs);
+	isFrameBased = FALSE;
+	isBezierCurveBased = TRUE;
+}
+
+// by-frame:
+ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, float* _start, const float& _end, const int& _frames){
+	easingP = NULL;
+	pEasingC = _easingC;
+	initofxKeyframe();
+	setup(_pTweenTarget, TWEEN_EASE_IN_OUT, _start, _end, _frames);
+	isFrameBased = TRUE;
+	isBezierCurveBased = TRUE;
+}
+
+// by-time:
+ofxKeyframe::ofxKeyframe(ofPtr<Playlist::easingCurve> _easingC, float * _pTweenTarget, float* _start, const float& _end, const float& _millisecs){
+	easingP = NULL;
+	pEasingC = _easingC;
+	initofxKeyframe();
+	setup(_pTweenTarget, TWEEN_EASE_IN_OUT, _start, _end, _millisecs);
+	isFrameBased = FALSE;
+	isBezierCurveBased = TRUE;
+}
+
+
+// easing function based
 
 // frame-based
 ofxKeyframe::ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float* _start, const float& _end, const int& _frames){
@@ -88,6 +135,14 @@ void ofxKeyframe::start(){
 	// get current animatedObject's start value by dereferencing the given start value pointer.
 	if (start_pos_p != NULL)	// is NULL in case TWEEN_PAUSE
 		start_pos = *start_pos_p;
+
+	if (isBezierCurveBased){
+		// initalise the bezier curve...
+		pEasingC->p1.set(0.f,*start_pos_p);
+		pEasingC->pc1 = ofVec2f(0.f,(*start_pos_p)) - pEasingC->pc1;
+		pEasingC->pc2 = ofVec2f(0.f,end_pos) - pEasingC->pc2;
+		pEasingC->p2.set(1.f,end_pos);
+	}
 }
 
 void ofxKeyframe::setup(float * _pTweenTarget, const TweenTransition& _tween_transition,  float* _start, const float& _end, const int& _steps)
@@ -99,6 +154,8 @@ void ofxKeyframe::setup(float * _pTweenTarget, const TweenTransition& _tween_tra
 	step = 0;
 	pTweenTarget = _pTweenTarget;
 	tween_transition = _tween_transition;
+	
+	
 };
 
 void ofxKeyframe::execute(){
@@ -120,12 +177,16 @@ void ofxKeyframe::execute(){
 		
 		if (!is_idle && step<=steps){
 			_r = 0.0;
-			
+
+			if (isBezierCurveBased)
+				_r = ofBezierPoint(pEasingC->p1, pEasingC->pc1, pEasingC->pc2, pEasingC->p2 , step/(float)steps).y;
+			else
 			switch (tween_transition) {
 				case TWEEN_EASE_IN:
 					_r = ofxEasingExt::easeInS( easingP, step, start_pos , end_pos-start_pos, steps);
-				case TWEEN_EASE_OUT:
-					_r = ofxEasingExt::easeOutS( easingP, step, start_pos , end_pos-start_pos, steps);
+					break;
+				case TWEEN_EASE_OUT: 
+					 _r = ofxEasingExt::easeOutS( easingP, step, start_pos , end_pos-start_pos, steps);
 					break;
 				case TWEEN_EASE_IN_OUT:
 					_r = ofxEasingExt::easeInOutS( easingP, step, start_pos , end_pos-start_pos, steps);
