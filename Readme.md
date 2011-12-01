@@ -1,7 +1,7 @@
 <pre>
      _____    ___     
     /    /   /  /     ofxPlaylist
-   /  __/   /  /__    (c) ponies & light, 2009-2011. 
+   /  __/ * /  /__    (c) ponies & light, 2009-2011. 
   /__/     /_____/    oo43.com
 
   ofxPlaylist
@@ -29,28 +29,51 @@
 
 # ofxPlaylist
 
-A playlist-based animation library. 
+A playlist-based animation library. Developed over a couple of years and used in a growing number of permanent installations. 
 
-A playlist holds a sequence of Keyframes which point to values to be tweened over time.
+Playlists hold a sequence of Keyframes, which either:
 
-Keyframes are cleared from their playlist upon completion. 
++ point to values to be tweened over time.
++ pause for a given duration
++ trigger an Event
+ 
+Keyframes are cleared from their Playlist upon completion. Additional Keyframes can be pushed onto the end of any Playlist at any time. Playlists can also be cleared at any time.
 
-## Features:
+## Key Features:
 
-* Any of Robert Penner' tweening functions via ofxTween
+* Tweens using any of Robert Penner' functions via ofxTween
+* Pause
+* Event Keyframes (special thanks to James George for suggesting these!)
+* Internal memory management using ofPtr()
+* Keyframes can be set to execute in sequence or in parallel
 * Calculate total remaining duration of Playlist
-* Pause Tween
-* Event Keyframes
-* Combined Keyframes which execute in parallel
-* NEW: Bézier curve tweens
+* NEW: Tweens follwing Bézier curves, mirroring the functionality of Adobe After Effects temporal timeline curves.
 
-## Usage
+## Use:
 
 Assuming you'd want to tween pos.x from it's current position when the Playlist starts executing to 0.f:
 
 <pre>
+
+// .h
+ofxPlaylist playlist1;
+
+// .cpp
+
 using namespace Playlist;
-playlist.addKeyFrame(Action::tween(1000.f, &pos.x, 0., TWEEN_SIN, TWEEN_EASE_OUT, &pos.x));
-playlist.addKeyFrame(Action::pause(500.f));
-playlist.addKeyFrame(Action::event(this, "EVENT MESSAGE"));
+
+// call factory function to insert a new keyframe to playlist
+// the tween shall last 1000ms (a float value indicates absolute time, an integer time value says you want to use frames as your time base)
+
+playlist1.addKeyFrame(Action::tween(1000.f, &pos.x, 0., TWEEN_SIN, TWEEN_EASE_OUT, &pos.x));
+
+// add a 500ms pause after the tweening ends.
+playlist1.addKeyFrame(Action::pause(500.f));
+
+// trigger an event after the 500ms pause ends.
+playlist1.addKeyFrame(Action::event(this, "EVENT MESSAGE"));
 </pre>
+
+## See also: 
+
+A more hands-on example of how to use ofxPlaylist and a run-down of its key features is shown in the included example Project, example/ofxPlaylistExample
