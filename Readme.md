@@ -87,7 +87,7 @@ void testApp::update(){
 
 	playlist1.update();
 
-	ofLog(OF_LOG_VERBOSE) << &quot;xPos: &quot; << ofToString(xPos);
+	ofLog(OF_LOG_VERBOSE) &lt;&lt; &quot;xPos: &quot; &lt;&lt; ofToString(xPos);
 }
 
 void testApp::draw(){
