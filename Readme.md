@@ -51,7 +51,7 @@ Keyframes are cleared from their Playlist upon completion. Additional Keyframes 
 
 ## Use:
 
-Keyframes tween from value a variable holds at the moment the Keyframe is reached to an absolute target value. Assuming you'd want to tween a float xPos from a randomly assigned value to 0.f, here's a mockup:
+Keyframes tween from value a variable holds at the moment the Keyframe is reached to an absolute target value. Assuming you'd want to tween a float xPos to a randomly assigned target value, here's a mockup:
 
 <pre>
 
@@ -68,18 +68,7 @@ class testApp(){
 
 void testApp::setup(){
 
-	xPos = ofRandomuf(1000.f);
-
-	using namespace Playlist;
-
-	// call factory function to insert a new Keyframe 
-	// (controlling xPos) to playlist1
-	
-	// the tween shall take 1000ms (a float time value indicates
-	// absolute time in Milliseconds, an integer time value 
-	// indicates you want to go frame-based)
-
-	playlist1.addKeyFrame(Action::tween(1000.f, &xPos, 0., TWEEN_SIN, TWEEN_EASE_OUT));
+	xPos = ofRandomuf(ofGetWidth());
 
 }
 
@@ -98,8 +87,19 @@ void testApp::draw(){
 void testApp::keyPressed(){
 
 	if (key == ' '){
-		// starts/pauses execution of the playlist
-		playlist1.isPlaying ^= true;
+		// adds a new keyframe to playlist1
+			using namespace Playlist;
+
+	// call factory function to insert a new Keyframe 
+	// (controlling xPos) to playlist1
+	
+	// the tween shall take 1000ms (a float time value indicates
+	// absolute time in Milliseconds, an integer time value 
+	// indicates you want to go frame-based)
+
+	playlist1.addKeyFrame(Action::tween(1000.f, &xPos, ofRandomuf(ofGetWidth()), TWEEN_SIN, TWEEN_EASE_OUT));
+
+	// the playlist will now start tweening xPos at the next update() cycle.
 	} 
 
 }
