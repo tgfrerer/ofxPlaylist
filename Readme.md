@@ -51,7 +51,7 @@ Keyframes are cleared from their Playlist upon completion. Additional Keyframes 
 
 ## Use:
 
-Assuming you'd want to tween pos.x from it's current position when the Playlist starts executing to 0.f:
+Keyframes tween from value a variable holds at the moment the Keyframe is reached to an absolute target value. Assuming you'd want to tween a float xPos from a randomly assigned value to 0.f, here's a mockup:
 
 <pre>
 
@@ -68,12 +68,16 @@ class testApp(){
 
 void testApp::setup(){
 
-	xPos = 100.f;
+	xPos = ofRandomuf(1000.f);
 
 	using namespace Playlist;
 
-	// call factory function to insert a new Keyframe (controlling xPos) to playlist1
-	// the tween shall last 1000ms (a float time value indicates absolute time in Milliseconds, an integer time value indicates you want to go frame-based)
+	// call factory function to insert a new Keyframe 
+	// (controlling xPos) to playlist1
+	
+	// the tween shall take 1000ms (a float time value indicates
+	// absolute time in Milliseconds, an integer time value 
+	// indicates you want to go frame-based)
 
 	playlist1.addKeyFrame(Action::tween(1000.f, &xPos, 0., TWEEN_SIN, TWEEN_EASE_OUT));
 
@@ -83,10 +87,12 @@ void testApp::update(){
 
 	playlist1.update();
 
+	ofLog(OF_LOG_VERBOSE) << "xPos: " << xPos;
 }
 
 void testApp::draw(){
-	// draw something at the current value of xPos
+	// use xPos
+	// ...
 }
 
 void testApp::keyPressed(){
