@@ -1,7 +1,7 @@
 <pre>
      _____    ___     
     /    /   /  /     ofxPlaylist
-   /  __/  /  /__    (c) ponies & light, 2009-2011. 
+   /  __/   /  /__    (c) ponies & light, 2009-2011. 
   /__/     /_____/    oo43.com
 
   ofxPlaylist
