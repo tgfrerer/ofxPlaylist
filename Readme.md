@@ -29,7 +29,7 @@
 
 # ofxPlaylist
 
-A playlist-based animation library. Developed over a couple of years and used in a growing number of permanent installations. 
+A playlist-based animation library. Developed over a couple of years and used in a growing number of permanent installations, deployed on OS X, Windows and Linux.
 
 Playlists hold a sequence of Keyframes, which either:
 
@@ -37,7 +37,7 @@ Playlists hold a sequence of Keyframes, which either:
 + pause for a given duration
 + trigger an Event
  
-Keyframes are cleared from their Playlist upon completion. Additional Keyframes can be pushed onto the end of any Playlist at any time. Playlists can also be cleared at any time.
+Keyframes are cleared from their Playlist upon completion. Additional Keyframes can be pushed onto the end of any Playlist at any time. Playlists can also be cleared at any time, even from within a Keyframe Event triggered by a playlist itself.
 
 ## Key Features:
 
@@ -56,24 +56,59 @@ Assuming you'd want to tween pos.x from it's current position when the Playlist 
 <pre>
 
 // .h
-ofxPlaylist playlist1;
+
+class testApp(){
+	// …
+	ofxPlaylist playlist1;
+	float xPos;
+	// …
+}
 
 // .cpp
 
-using namespace Playlist;
+void testApp::setup(){
 
-// call factory function to insert a new keyframe to playlist
-// the tween shall last 1000ms (a float value indicates absolute time, an integer time value says you want to use frames as your time base)
+	xPos = 100.f;
 
-playlist1.addKeyFrame(Action::tween(1000.f, &pos.x, 0., TWEEN_SIN, TWEEN_EASE_OUT, &pos.x));
+	using namespace Playlist;
 
-// add a 500ms pause after the tweening ends.
-playlist1.addKeyFrame(Action::pause(500.f));
+	// call factory function to insert a new Keyframe (controlling xPos) to playlist1
+	// the tween shall last 1000ms (a float time value indicates absolute time in Milliseconds, an integer time value indicates you want to go frame-based)
 
-// trigger an event after the 500ms pause ends.
-playlist1.addKeyFrame(Action::event(this, "EVENT MESSAGE"));
+	playlist1.addKeyFrame(Action::tween(1000.f, &xPos, 0., TWEEN_SIN, TWEEN_EASE_OUT));
+
+}
+
+void testApp::update(){
+
+	playlist1.update();
+
+}
+
+void testApp::draw(){
+	// draw something at the current value of xPos
+}
+
+void testApp::keyPressed(){
+
+	if (key == ' '){
+		// starts/pauses execution of the playlist
+		playlist1.isPlaying ^= true;
+	} 
+
+}
+
 </pre>
 
 ## See also: 
 
-A more hands-on example of how to use ofxPlaylist and a run-down of its key features is shown in the included example Project, example/ofxPlaylistExample
+A more hands-on example of how to use ofxPlaylist and a run-down of its key features is shown in the included example Project, 
+<pre>
+example/ofxPlaylistExample
+</pre>
+
+## Dependencies:
+
+<pre>
+ofxEasing (part of ofxTween)
+</pre>
