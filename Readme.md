@@ -87,7 +87,7 @@ void testApp::update(){
 
 	playlist1.update();
 
-	ofLog(OF_LOG_VERBOSE) << "xPos: " << xPos;
+	ofLog(OF_LOG_VERBOSE) << &quot;xPos: &quot; << ofToString(xPos);
 }
 
 void testApp::draw(){
@@ -108,7 +108,8 @@ void testApp::keyPressed(){
 
 ## See also: 
 
-A more hands-on example of how to use ofxPlaylist and a run-down of its key features is shown in the included example Project, 
+A more hands-on example of how to use ofxPlaylist and a run-down of its key features is shown in the included example Project:
+ 
 <pre>
 example/ofxPlaylistExample
 </pre>
