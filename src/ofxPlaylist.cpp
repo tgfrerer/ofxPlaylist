@@ -213,3 +213,17 @@ void ofxPlaylist::flush(){
 		}
 }
 
+// ----------------------------------------------------------------------
+
+ofxPlaylist::~ofxPlaylist(){
+		ofLog(OF_LOG_VERBOSE) << "~ofxPlaylist";
+		detach();
+		bShouldClear = true;
+		if (playlistMutex.tryLock(50)){			// allow for a grace period of 50ms
+												// before clearing, just in case
+												// the object gets destroyed while the mutex is under lock.
+			clear();
+		}
+		playlistMutex.unlock();					// unlock the mutex regardless of what happens.
+}
+
