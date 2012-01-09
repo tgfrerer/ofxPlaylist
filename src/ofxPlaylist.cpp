@@ -123,7 +123,7 @@ void ofxPlaylist::update(){
 
 	if (bShouldClear == true) {
 		bShouldClear = false;
-		ofLog(OF_LOG_NOTICE) << "Did catch soft-clear at the end.";
+		ofLog(OF_LOG_VERBOSE) << "Did catch soft-clear at the end.";
 		clear();
 		return;
 	}
@@ -135,12 +135,12 @@ void ofxPlaylist::update(){
 
 void ofxPlaylist::clear(){
 	if(playlistMutex.tryLock()){
-		ofLog(OF_LOG_NOTICE) << "Clearing ofxPlaylist.playlist";
+		ofLog(OF_LOG_VERBOSE) << "Clearing ofxPlaylist.playlist";
 		playlist.clear(); 					// aah...... the beauty of
 		bShouldClear = false;
 		playlistMutex.unlock();
 	} else {
-		ofLog(OF_LOG_NOTICE) << "playlist cannot be cleared currently. Activating soft-clear.";
+		ofLog(OF_LOG_VERBOSE) << "playlist cannot be cleared currently. Activating soft-clear.";
 		bShouldClear = true;
 	}
 };
