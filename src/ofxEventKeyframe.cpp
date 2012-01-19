@@ -19,4 +19,4 @@
 
 #include "ofxEventKeyframe.h"
 
-ofxCoreKeyframeEvents ofxKeyframeEvents;		// declare the extern 
+ofxCoreKeyframeEvents ofxKeyframeEvents;		// declare the extern as static
