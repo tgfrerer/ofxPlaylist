@@ -137,7 +137,7 @@ public:
 				string tmpPosValue = animXML.getAttribute("key", "value", "", k);
 				if (k==0 && tmpPosValue != ""){
 					// the first keyframe is not really a keyframe, it is the start value.
-					targetVar = ofToFloat(tmpPosValue);
+					// targetVar = ofToFloat(tmpPosValue);
 					
 					lastOutInfluence	= animXML.getAttribute("key","out_influence", 0.f, k) / 100.f;
 					lastOutSpeed		= animXML.getAttribute("key","out_speed", 0.f, k);
@@ -145,7 +145,7 @@ public:
 					lastInterpInNonLinear = (animXML.getAttribute("key", "interp_out", "", k) != "Linear");
 				}
 				
-				if (k>0 && tmpPosValue != ""){
+				if (k>=0 && tmpPosValue != ""){
 					
 					float keyFrameTime = animXML.getAttribute("key", "time", 0.f, k);
 					
