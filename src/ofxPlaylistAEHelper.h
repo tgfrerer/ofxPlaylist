@@ -120,11 +120,44 @@ public:
 	
 	// ----------------------------------------------------------------------
 	
-	static void parseKeyframesFor(ofxXmlSettings& animXML, ofxPlaylist& tmpPlaylist, float& targetVar, int j){
+	static void parseKeyFramesForPair(ofxXmlSettings& animXML, ofxPlaylist& tmpPlaylist, float& targetVarX, float& targetVarY, string aeXmlPropertyType){
 		using namespace Playlist;
 		
-		if (animXML.pushTag("property",j) >0){
-			// we are now within the Position transorm tag
+		if (pushXMLto(animXML,"property,type=" +  aeXmlPropertyType)){
+
+		// we are now within the Position transorm tag
+		int kC = animXML.getNumTags("key");
+		
+		float lastTime = 0;
+		
+		for (int k=0; k<kC; k++){
+			
+			vector<string> tmpPosValues = ofSplitString(animXML.getAttribute("key", "value", "", k), ",");
+			
+			float keyFrameTime = animXML.getAttribute("key", "time", 0.f, k);
+			
+			tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVarX, ofToFloat(tmpPosValues[0]), TWEEN_LIN, TWEEN_EASE_IN_OUT));
+			tmpPlaylist.addToKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVarY, ofToFloat(tmpPosValues[1]), TWEEN_LIN, TWEEN_EASE_IN_OUT));
+			
+			lastTime = keyFrameTime;
+			
+			
+			ofLog(OF_LOG_NOTICE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k)
+			<< "anchor point: " << animXML.getAttribute("key", "value", "", k);
+			
+		}
+		animXML.popTag();	// property
+		}
+	}
+	
+	
+	// ----------------------------------------------------------------------
+	
+	static void parseKeyframesFor(ofxXmlSettings& animXML, ofxPlaylist& tmpPlaylist, float& targetVar, string aeXmlPropertyType){
+		using namespace Playlist;
+		
+		if (pushXMLto(animXML,"property,type=" +  aeXmlPropertyType)){
+			// we are now within the <property type="aeXmlPropertyType"> transorm tag
 			int kC = animXML.getNumTags("key");
 			
 			float lastTime = 0;
