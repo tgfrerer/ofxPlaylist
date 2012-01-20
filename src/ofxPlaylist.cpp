@@ -222,8 +222,23 @@ void ofxPlaylist::flush(){
 // ----------------------------------------------------------------------
 
 void ofxPlaylist::savePlaylistCurrentlyInBufferToInternalMap(string playlistName){
+	
+	// n.b.: this needs to happen before flush() is called for the first time, typically, this would happen during update()
+	
 	savedPlaylists[playlistName] = playlistBuffer;
 };
+
+// ----------------------------------------------------------------------
+
+void ofxPlaylist::saveAndInitialiseTargetsAndClear(string playlistName){
+
+	// this will set all ofxPlaylist target values to their initial state
+	// but then we instantly clear the playlists, so that the animation will only be running if we call queueAnimations().
+
+	savePlaylistCurrentlyInBufferToInternalMap(playlistName);
+	update();
+	clear();
+}
 
 
 // ----------------------------------------------------------------------

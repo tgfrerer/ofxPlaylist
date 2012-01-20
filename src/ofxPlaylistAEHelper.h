@@ -120,7 +120,7 @@ public:
 	
 	// ----------------------------------------------------------------------
 	
-	static void parseKeyFramesForPair(ofxXmlSettings& animXML, ofxPlaylist& tmpPlaylist, float& targetVarX, float& targetVarY, string aeXmlPropertyType){
+	static void parseKeyframesForPair(ofxXmlSettings& animXML, ofxPlaylist& tmpPlaylist, float& targetVarX, float& targetVarY, string aeXmlPropertyType){
 		using namespace Playlist;
 		
 		if (pushXMLto(animXML,"property,type=" +  aeXmlPropertyType)){
@@ -142,7 +142,7 @@ public:
 			lastTime = keyFrameTime;
 			
 			
-			ofLog(OF_LOG_NOTICE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k)
+			ofLog(OF_LOG_VERBOSE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k)
 			<< "anchor point: " << animXML.getAttribute("key", "value", "", k);
 			
 		}
@@ -188,11 +188,11 @@ public:
 						bezTween->setInSpeed(lastOutSpeed);
 						
 						float tmpOI = animXML.getAttribute("key", "in_influence", 0.f, k) / 100.f;
-						ofLog(OF_LOG_NOTICE) << "in_influence   :" << tmpOI;
+						ofLog(OF_LOG_VERBOSE) << "in_influence   :" << tmpOI;
 						bezTween->setOutInfluence(tmpOI);
 						float tmpSpeed = animXML.getAttribute("key", "in_speed", 0.f, k);
 						bezTween->setOutSpeed(tmpSpeed);
-						ofLog(OF_LOG_NOTICE) << "in_speed       :" << tmpSpeed;
+						ofLog(OF_LOG_VERBOSE) << "in_speed       :" << tmpSpeed;
 						// add bezier keyframe.
 						tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVar, ofToFloat(tmpPosValue), ofPtr<BezierTween>(bezTween)));
 						
@@ -200,8 +200,8 @@ public:
 						tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVar, ofToFloat(tmpPosValue), TWEEN_LIN, TWEEN_EASE_IN_OUT));
 					}
 					
-					ofLog(OF_LOG_NOTICE) << "lastOutInfluence:" << lastOutInfluence;
-					ofLog(OF_LOG_NOTICE) << "lastOutSpeed    :" << lastOutSpeed;
+					ofLog(OF_LOG_VERBOSE) << "lastOutInfluence:" << lastOutInfluence;
+					ofLog(OF_LOG_VERBOSE) << "lastOutSpeed    :" << lastOutSpeed;
 					
 					lastTime = keyFrameTime;
 					lastOutInfluence	= animXML.getAttribute("key","out_influence", 0.f, k) / 100.f;
@@ -212,7 +212,7 @@ public:
 					
 				}
 				
-				ofLog(OF_LOG_NOTICE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k)
+				ofLog(OF_LOG_VERBOSE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k)
 				<< "value ("<< k << "):  " << animXML.getAttribute("key", "value", "", k);
 				
 			}

@@ -160,6 +160,7 @@ public:
 	ofxPlaylist& addToKeyFrame(ofPtr<ofxBaseKeyframe> _action);
 	
 	void savePlaylistCurrentlyInBufferToInternalMap(string playlistName);
+	void saveAndInitialiseTargetsAndClear(string playlistName);
 	void replacePlaylistCurrentlyInBufferWithPlaylistFromInternalMap(string playlistName);
 
 	
