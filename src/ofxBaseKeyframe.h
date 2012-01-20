@@ -44,7 +44,9 @@ public:
 	virtual void execute()=0;  // this function needs to be set in all inheriting classes!
 	virtual void start(){};
 	virtual int getDuration()=0;
-	
+
+	bool hasStarted;
+
 };
 
 

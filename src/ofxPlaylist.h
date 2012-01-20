@@ -159,7 +159,8 @@ public:
 	ofxPlaylist& addKeyFrame(ofPtr<ofxBaseKeyframe> _action);
 	ofxPlaylist& addToKeyFrame(ofPtr<ofxBaseKeyframe> _action);
 	
-
+	void savePlaylistCurrentlyInBufferToInternalMap(string playlistName);
+	void replacePlaylistCurrentlyInBufferWithPlaylistFromInternalMap(string playlistName);
 
 	
 	// -----------------------------------------------------------------------------
@@ -169,6 +170,8 @@ private:
 	ofMutex playlistMutex;
 	deque<ofPtr<Keyframe> > playlist;
 	deque<ofPtr<Keyframe> > playlistBuffer;
+	
+	map<string, deque<ofPtr<Keyframe> > > savedPlaylists;
 	
 	int lastDuration;
 	bool isAttached;

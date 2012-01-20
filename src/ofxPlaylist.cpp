@@ -136,7 +136,7 @@ void ofxPlaylist::update(){
 void ofxPlaylist::clear(){
 	if(playlistMutex.tryLock()){
 		ofLog(OF_LOG_VERBOSE) << "Clearing ofxPlaylist.playlist";
-		playlist.clear(); 					// aah...... the beauty of
+		playlist.clear(); 					// aah...... the beauty of ofPtr<>
 		bShouldClear = false;
 		playlistMutex.unlock();
 	} else {
@@ -174,6 +174,11 @@ bool ofxPlaylist::doNext(){
 	// don't do anything if you are requested to clear.
 	if (bShouldClear == true) return FALSE;
 
+	for (int i=0; i<playlist.front()->size(); i++) {
+		// reset keyframe is_idle value, just in case it has been stored for re-use.
+		(*playlist.front())[i]->is_idle = false;
+		(*playlist.front())[i]->hasStarted = false;
+	}
 
 	ofLog(OF_LOG_VERBOSE) << "deleting front of queue";
 	playlist.pop_front();
@@ -211,7 +216,34 @@ void ofxPlaylist::flush(){
 			playlistBuffer.pop_front();
 			ofLog(OF_LOG_VERBOSE) << "flushing one object";
 		}
+	
 }
+
+// ----------------------------------------------------------------------
+
+void ofxPlaylist::savePlaylistCurrentlyInBufferToInternalMap(string playlistName){
+	savedPlaylists[playlistName] = playlistBuffer;
+};
+
+
+// ----------------------------------------------------------------------
+
+void ofxPlaylist::replacePlaylistCurrentlyInBufferWithPlaylistFromInternalMap(string playlistName){
+	
+	map<string, deque<ofPtr<Keyframe> > >::iterator it = savedPlaylists.find(playlistName);
+	
+	if (it != savedPlaylists.end()){
+		// we have found a saved playlist with this name!
+		
+		playlist.clear();					// attempt to clear playlist
+		playlistBuffer = it->second;		// replace buffer with stored playlist
+		
+	} else {
+		ofLog(OF_LOG_WARNING) << "ofxPlaylist: could not find saved playlist: " << playlistName;
+	}
+	
+};
+
 
 // ----------------------------------------------------------------------
 

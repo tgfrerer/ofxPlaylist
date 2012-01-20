@@ -169,7 +169,6 @@ private:
 	
 	// variables you need to save for every tween
 	float * pTweenTarget;
-	bool hasStarted;
 	unsigned long startValue;
 	float start_pos;
 	float * start_pos_p;
