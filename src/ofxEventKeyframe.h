@@ -56,13 +56,13 @@ public:
 	
 };
 
-class ofxCoreKeyframeEvents
+class ofxPlaylistEvents
 {
 public:
   	ofEvent<ofxPlaylistEventArgs> onKeyframe;
 };
 
-extern ofxCoreKeyframeEvents ofxKeyframeEvents;
+extern ofxPlaylistEvents ofxKeyframeEvents;
 
 template<class ListenerClass>
 void ofxKeyframeAnimRegisterEvents(ListenerClass * listener){
