@@ -1,11 +1,11 @@
 <pre>
      _____    ___     
     /    /   /  /     ofxPlaylist
-   /  __/ * /  /__    (c) ponies & light, 2009-2011. 
+   /  __/ * /  /__    (c) ponies & light, 2009-2012. 
   /__/     /_____/    oo43.com
 
   ofxPlaylist
-  Created by Tim Gfrerer 2009-2011.
+  Created by Tim Gfrerer 2009-2012.
   
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -114,5 +114,5 @@ example/ofxPlaylistExample
 ## Dependencies:
 
 <pre>
-ofxEasing (part of ofxTween)
+	none. (ofxPlaylistAEHelper makes heavy use of ofxXMLSettings, which is part of the openFrameworks Core Addons)
 </pre>
