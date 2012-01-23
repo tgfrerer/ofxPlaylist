@@ -120,7 +120,7 @@ public:
 	
 	// ----------------------------------------------------------------------
 	
-	static void parseKeyframesForPair(ofxXmlSettings& animXML, ofxPlaylist& tmpPlaylist, float& targetVarX, float& targetVarY, string aeXmlPropertyType){
+	static void parseKeyframesForPair(ofxXmlSettings& animXML, ofxPlaylist& tmpPlaylist, float& targetVarX, float& targetVarY, string aeXmlPropertyType, float offsetX=0, float offsetY=0){
 		using namespace Playlist;
 		
 		if (pushXMLto(animXML,"property,type=" +  aeXmlPropertyType)){
@@ -136,14 +136,16 @@ public:
 			
 			float keyFrameTime = animXML.getAttribute("key", "time", 0.f, k);
 			
-			tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVarX, ofToFloat(tmpPosValues[0]), TWEEN_LIN, TWEEN_EASE_IN_OUT));
-			tmpPlaylist.addToKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVarY, ofToFloat(tmpPosValues[1]), TWEEN_LIN, TWEEN_EASE_IN_OUT));
+			tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVarX, ofToFloat(tmpPosValues[0]) + offsetX, TWEEN_LIN, TWEEN_EASE_IN_OUT));
+			tmpPlaylist.addToKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVarY, ofToFloat(tmpPosValues[1]) + offsetY, TWEEN_LIN, TWEEN_EASE_IN_OUT));
 			
 			lastTime = keyFrameTime;
 			
 			
-			ofLog(OF_LOG_VERBOSE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k)
-			<< "anchor point: " << animXML.getAttribute("key", "value", "", k);
+			ofLog(OF_LOG_VERBOSE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k) << endl
+			<< "anchor point: " << animXML.getAttribute("key", "value", "", k) << endl
+			<< "value X: " << ofToFloat(tmpPosValues[0]) << " + offsetX: " << offsetX << endl
+			<< "value Y: " << ofToFloat(tmpPosValues[1]) << " + offsetY: " << offsetY;
 			
 		}
 		animXML.popTag();	// property
@@ -153,7 +155,7 @@ public:
 	
 	// ----------------------------------------------------------------------
 	
-	static void parseKeyframesFor(ofxXmlSettings& animXML, ofxPlaylist& tmpPlaylist, float& targetVar, string aeXmlPropertyType){
+	static void parseKeyframesFor(ofxXmlSettings& animXML, ofxPlaylist& tmpPlaylist, float& targetVar, string aeXmlPropertyType, float offsetVal=0){
 		using namespace Playlist;
 		
 		if (pushXMLto(animXML,"property,type=" +  aeXmlPropertyType)){
@@ -194,10 +196,10 @@ public:
 						bezTween->setOutSpeed(tmpSpeed);
 						ofLog(OF_LOG_VERBOSE) << "in_speed       :" << tmpSpeed;
 						// add bezier keyframe.
-						tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVar, ofToFloat(tmpPosValue), ofPtr<BezierTween>(bezTween)));
+						tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVar, ofToFloat(tmpPosValue ) + offsetVal, ofPtr<BezierTween>(bezTween)));
 						
 					} else {
-						tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVar, ofToFloat(tmpPosValue), TWEEN_LIN, TWEEN_EASE_IN_OUT));
+						tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVar, ofToFloat(tmpPosValue ) + offsetVal, TWEEN_LIN, TWEEN_EASE_IN_OUT));
 					}
 					
 					ofLog(OF_LOG_VERBOSE) << "lastOutInfluence:" << lastOutInfluence;
@@ -213,7 +215,8 @@ public:
 				}
 				
 				ofLog(OF_LOG_VERBOSE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k)
-				<< "value ("<< k << "):  " << animXML.getAttribute("key", "value", "", k);
+				<< "value ("<< k << "):  " << animXML.getAttribute("key", "value", "", k)
+				<< "offset: " << offsetVal;
 				
 			}
 			animXML.popTag();	// property
