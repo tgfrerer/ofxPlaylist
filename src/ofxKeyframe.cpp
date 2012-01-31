@@ -21,7 +21,9 @@
 #include "ofxEasingExt.h"
 
 void ofxKeyframe::initofxKeyframe(){
+#ifdef PLAYLIST_DEBUG_MODE
 	ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": new ofxKeyframe();";
+#endif
 	is_idle = FALSE;     
 	pTweenTarget = NULL;
 	hasStarted = FALSE;
@@ -127,7 +129,9 @@ ofxKeyframe::ofxKeyframe(const float& _millisecs){
 
 
 void ofxKeyframe::start(){
+#ifdef PLAYLIST_DEBUG_MODE
 	ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": ofxKeyframe start";
+#endif
 	is_idle = FALSE;
 	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTime();
 	step = 0;

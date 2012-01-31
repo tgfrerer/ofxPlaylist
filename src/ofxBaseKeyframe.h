@@ -34,7 +34,10 @@ class ofxBaseKeyframe {
 public:
 	ofxBaseKeyframe(){};
 	virtual ~ofxBaseKeyframe(){ 
+#ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": ~ofxKeyFrame();";
+#endif
+
 	};     // by calling this function virtual I make sure to call the destructor for 
 		   // the derived class - and not for the parent class!
 	

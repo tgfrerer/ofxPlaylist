@@ -98,7 +98,9 @@ public:
 			keyframeEventArgs.message = message;
 			keyframeEventArgs.pSender = pSender;
 			// ofxCoreKeyframeEvents Ev;
+#ifdef PLAYLIST_DEBUG_MODE
 			ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": EventKeyframe calling event, passing message: " << message ;
+#endif
 			ofNotifyEvent(ofxKeyframeEvents.onKeyframe, keyframeEventArgs);
 		}
 		is_idle = TRUE;	// get rid of it.

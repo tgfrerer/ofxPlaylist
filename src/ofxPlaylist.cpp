@@ -78,7 +78,9 @@ void ofxPlaylist::update(){
 
 	if (bShouldClear == true) {
 		bShouldClear = false;
+#ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << "Did catch soft-clear at the start.";
+#endif
 		clear();
 		return;
 	}
@@ -123,7 +125,9 @@ void ofxPlaylist::update(){
 
 	if (bShouldClear == true) {
 		bShouldClear = false;
+#ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << "Did catch soft-clear at the end.";
+#endif
 		clear();
 		return;
 	}
@@ -135,12 +139,16 @@ void ofxPlaylist::update(){
 
 void ofxPlaylist::clear(){
 	if(playlistMutex.tryLock()){
+#ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << "Clearing ofxPlaylist.playlist";
+#endif
 		playlist.clear(); 					// aah...... the beauty of ofPtr<>
 		bShouldClear = false;
 		playlistMutex.unlock();
 	} else {
+#ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << "playlist cannot be cleared currently. Activating soft-clear.";
+#endif
 		bShouldClear = true;
 	}
 };
@@ -179,12 +187,17 @@ bool ofxPlaylist::doNext(){
 		(*playlist.front())[i]->is_idle = false;
 		(*playlist.front())[i]->hasStarted = false;
 	}
-
+	
+#ifdef PLAYLIST_DEBUG_MODE
 	ofLog(OF_LOG_VERBOSE) << "deleting front of queue";
+#endif
+	
 	playlist.pop_front();
-
+	
+#ifdef PLAYLIST_DEBUG_MODE
 	ofLog(OF_LOG_VERBOSE) << "Playlist size now:" << playlist.size();
-
+#endif
+	
 	if (!playlist.empty()) {
 		Keyframe currentKeyframe = *(playlist.front());
 //		int idleCount = 0;
@@ -214,7 +227,9 @@ void ofxPlaylist::flush(){
 		while (!playlistBuffer.empty()) {
 			playlist.push_back(playlistBuffer.front());
 			playlistBuffer.pop_front();
+#ifdef PLAYLIST_DEBUG_MODE
 			ofLog(OF_LOG_VERBOSE) << "flushing one object";
+#endif
 		}
 	
 }
@@ -263,7 +278,9 @@ void ofxPlaylist::replacePlaylistCurrentlyInBufferWithPlaylistFromInternalMap(st
 // ----------------------------------------------------------------------
 
 ofxPlaylist::~ofxPlaylist(){
+#ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << "~ofxPlaylist";
+#endif
 		detach();
 		bShouldClear = true;
 		if (playlistMutex.tryLock(50)){			// allow for a grace period of 50ms

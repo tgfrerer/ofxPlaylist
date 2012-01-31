@@ -141,7 +141,9 @@ public:
 	explicit ofxKeyframe(const float& _millisecs);
 
 	~ofxKeyframe(){
+#ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": ~ofxKeyframe();";
+#endif
 	};
 	
 	// bool value to give notice that the tween has finished.

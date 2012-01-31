@@ -140,7 +140,9 @@ public:
 	,isAttached(FALSE)
 	,bShouldClear(FALSE)
 	{ 
+#ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << "Instantiated new ofxPlaylist.";
+#endif
 	};
 	
 	~ofxPlaylist();

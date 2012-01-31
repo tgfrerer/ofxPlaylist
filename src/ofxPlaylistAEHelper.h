@@ -142,11 +142,12 @@ public:
 			lastTime = keyFrameTime;
 			
 			
+#ifdef PLAYLIST_DEBUG_MODE
 			ofLog(OF_LOG_VERBOSE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k) << endl
 			<< "anchor point: " << animXML.getAttribute("key", "value", "", k) << endl
 			<< "value X: " << ofToFloat(tmpPosValues[0]) << " + offsetX: " << offsetX << endl
 			<< "value Y: " << ofToFloat(tmpPosValues[1]) << " + offsetY: " << offsetY;
-			
+#endif			
 		}
 		animXML.popTag();	// property
 		}
@@ -190,11 +191,15 @@ public:
 						bezTween->setInSpeed(lastOutSpeed);
 						
 						float tmpOI = animXML.getAttribute("key", "in_influence", 0.f, k) / 100.f;
+#ifdef PLAYLIST_DEBUG_MODE
 						ofLog(OF_LOG_VERBOSE) << "in_influence   :" << tmpOI;
+#endif
 						bezTween->setOutInfluence(tmpOI);
 						float tmpSpeed = animXML.getAttribute("key", "in_speed", 0.f, k);
 						bezTween->setOutSpeed(tmpSpeed);
+#ifdef PLAYLIST_DEBUG_MODE
 						ofLog(OF_LOG_VERBOSE) << "in_speed       :" << tmpSpeed;
+#endif
 						// add bezier keyframe.
 						tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVar, ofToFloat(tmpPosValue ) + offsetVal, ofPtr<BezierTween>(bezTween)));
 						
@@ -202,9 +207,10 @@ public:
 						tmpPlaylist.addKeyFrame(Action::tween((keyFrameTime - lastTime)*1000.f, &targetVar, ofToFloat(tmpPosValue ) + offsetVal, TWEEN_LIN, TWEEN_EASE_IN_OUT));
 					}
 					
+#ifdef PLAYLIST_DEBUG_MODE
 					ofLog(OF_LOG_VERBOSE) << "lastOutInfluence:" << lastOutInfluence;
 					ofLog(OF_LOG_VERBOSE) << "lastOutSpeed    :" << lastOutSpeed;
-					
+#endif					
 					lastTime = keyFrameTime;
 					lastOutInfluence	= animXML.getAttribute("key","out_influence", 0.f, k) / 100.f;
 					
@@ -213,10 +219,12 @@ public:
 					lastInterpInNonLinear = (animXML.getAttribute("key", "interp_out", "", k) != "Linear");
 					
 				}
-				
+
+#ifdef PLAYLIST_DEBUG_MODE
 				ofLog(OF_LOG_VERBOSE) << "time:  " << animXML.getAttribute("key", "time", 0.f, k)
 				<< "value ("<< k << "):  " << animXML.getAttribute("key", "value", "", k)
 				<< "offset: " << offsetVal;
+#endif
 				
 			}
 			animXML.popTag();	// property
