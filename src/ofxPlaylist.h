@@ -39,22 +39,46 @@
 
 // ----------------------------------------------------------------------
 
+#include "ofxEasingBack.h"
+#include "ofxEasingBounce.h"
+#include "ofxEasingCirc.h"
+#include "ofxEasingCubic.h"
+#include "ofxEasingElastic.h"
+#include "ofxEasingExpo.h"
 #include "ofxEasingLinear.h"
-#include "ofxEasingSine.h"
 #include "ofxEasingQuad.h"
+#include "ofxEasingQuart.h"
+#include "ofxEasingQuint.h"
+#include "ofxEasingSine.h"
 
 namespace Playlist{
 
 	enum TweenType{
+		TWEEN_BACK,
+		TWEEN_BOUNCE,
+		TWEEN_CIRC,
+		TWEEN_CUBIC,
+		TWEEN_ELASTIC,
+		TWEEN_EXPO,
 		TWEEN_LIN,
 		TWEEN_QUAD,
+		TWEEN_QUART,
+		TWEEN_QUINT,
 		TWEEN_SIN,
 		TWEEN_BEZIER
 	};
 
+	extern ofxEasingBack	tweenBack;
+	extern ofxEasingBounce  tweenBounce;
+	extern ofxEasingCirc	tweenCirc;
+	extern ofxEasingCubic	tweenCubic;
+	extern ofxEasingElastic tweenElastic;
+	extern ofxEasingExpo	tweenExpo;
 	extern ofxEasingLinear  tweenLinear;
-	extern ofxEasingSine	tweenSine;
 	extern ofxEasingQuad	tweenQuad;
+	extern ofxEasingQuart	tweenQuart;
+	extern ofxEasingQuint	tweenQuint;
+	extern ofxEasingSine	tweenSine;
 
 	namespace Action {
 		
@@ -79,14 +103,38 @@ namespace Playlist{
 												// the moment the Tween gets executed for the first time.
 			
 			switch (tweenType) {
+				case TWEEN_BACK:
+					easingP = &tweenBack;
+					break;
+				case TWEEN_BOUNCE:
+					easingP = &tweenBounce;
+					break;
+				case TWEEN_CIRC: 
+					easingP = &tweenCirc;
+					break;
+				case TWEEN_CUBIC:
+					easingP = &tweenCubic;
+					break;
+				case TWEEN_ELASTIC:
+					easingP = &tweenElastic;
+					break;
+				case TWEEN_EXPO:
+					easingP = &tweenExpo;
+					break;
 				case TWEEN_LIN:
 					easingP = &tweenLinear;
 					break;
-				case TWEEN_SIN:
-					easingP = &tweenSine;
-					break;
 				case TWEEN_QUAD:
 					easingP = &tweenQuad;
+					break;
+				case TWEEN_QUART:
+					easingP = &tweenQuart;
+					break;
+				case TWEEN_QUINT:
+					easingP = &tweenQuint;
+					break;
+				case TWEEN_SIN:
+					easingP = &tweenSine;
 					break;
 				default:
 					break;

@@ -19,9 +19,17 @@
 
 #include "ofxPlaylist.h"
 
-ofxEasingLinear Playlist::tweenLinear;				// 	declare global tween objects for ofxKeyframes
-ofxEasingSine	Playlist::tweenSine;
-ofxEasingQuad	Playlist::tweenQuad;
+ ofxEasingBack		Playlist::tweenBack;				// 	declare global tween objects for ofxKeyframes
+ ofxEasingBounce	Playlist::tweenBounce;
+ ofxEasingCirc		Playlist::tweenCirc;
+ ofxEasingCubic		Playlist::tweenCubic;
+ ofxEasingElastic	Playlist::tweenElastic;
+ ofxEasingExpo		Playlist::tweenExpo;
+ ofxEasingLinear	Playlist::tweenLinear;
+ ofxEasingQuad		Playlist::tweenQuad;
+ ofxEasingQuart		Playlist::tweenQuart;
+ ofxEasingQuint		Playlist::tweenQuint;
+ ofxEasingSine		Playlist::tweenSine;
 
 
 // ----------------------------------------------------------------------
