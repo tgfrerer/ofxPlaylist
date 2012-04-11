@@ -23,7 +23,7 @@ public:
 	AnimatedRectangle(){		
 		pos=ofVec3f((ofGetWidth()-120)*ofRandomuf(),(ofGetHeight()-80)*ofRandomuf() ,0);
 		size=ofVec2f(120,80);
-		color=ofFloatColor(ofRandomuf() * 255.,ofRandomuf() * 255., ofRandomuf() * 255., 255.);
+		color=ofFloatColor(ofRandomuf() * 255.,ofRandomuf() * 255., ofRandomuf() * 255., ofRandomuf() * 255.);
 		angle = ofRandomuf() * 360.;
 	};
 	~AnimatedRectangle(){

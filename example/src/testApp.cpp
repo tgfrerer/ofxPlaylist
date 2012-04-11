@@ -6,6 +6,7 @@ void testApp::setup(){
 	ofSetLogLevel(OF_LOG_VERBOSE);
 	ofSetFrameRate(60);
 	ofSetVerticalSync(TRUE);
+	ofSetBackgroundAuto(false);
 	
 	ofxKeyframeAnimRegisterEvents(this);
 	
@@ -41,15 +42,31 @@ void testApp::onKeyframe(ofxPlaylistEventArgs& args){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	vector<AnimatedRectangle *>::iterator it = animatedRectangles.begin();
 	
-	while (it != animatedRectangles.end()) {
-		// draw that Rectangle.
-		(*it)->draw();
-		it++;
+
+	ofPushStyle();
+		ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+		ofSetColor(0, 5);
+		ofFill();
+		ofRect(0,0,ofGetWidth(),ofGetHeight());
+	ofPopStyle();
+
+	ofEnableBlendMode(OF_BLENDMODE_SCREEN);
+	
+	for (int i=0; i<animatedRectangles.size(); i++){
+		animatedRectangles[i]->draw();
 	}
 	
-	ofDrawBitmapString(ofToString(ofGetFrameNum()) + ":" + ofToString(ofGetFrameRate()),ofPoint(ofGetWidth()/2.,ofGetHeight()/2.));
+	ofPushStyle();
+		ofDisableBlendMode();
+		ofSetColor(0,255);
+		ofRect(ofGetWidth()/2. - 4, ofGetHeight()/2. - 12, 120, 20);
+		ofFill();	
+		ofSetColor(255);
+		ofDrawBitmapString(ofToString(ofGetFrameNum()) + ":" + ofToString(ofGetFrameRate()),ofPoint(ofGetWidth()/2.,ofGetHeight()/2.));
+	ofPopStyle();
+	
+
 }
 
 //--------------------------------------------------------------

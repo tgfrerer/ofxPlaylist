@@ -82,23 +82,21 @@ void testApp::update(){
 }
 
 void testApp::draw(){
-	// use xPos
+	// let's do something with xPos so that we can see the tween happening
 	// ...
+	ofCircle(xPos, ofGetHeight()/2.f, 10); 
 }
 
 void testApp::keyPressed(){
-using namespace Playlist;
+	using namespace Playlist;
 
 	if (key == ' '){
+		float targetXPos = ofRandomuf(ofGetWidth());
+		
+		playlist1.addKeyFrame(Action::tween(1000.f, &xPos, targetXPos));
 		// adds a new keyframe to playlist1
-
-	float targetPos = ofRandomuf(ofGetWidth());
-
-	playlist1.addKeyFrame(Action::tween(1000.f, &xPos, targetPos , TWEEN_SIN, TWEEN_EASE_OUT));
-
-	// the playlist will now start tweening xPos towards targetPos at the next update() cycle.
+		// the playlist will now start tweening xPos towards targetXPos at the next update() cycle.
 	} 
-
 }
 
 </pre>
@@ -110,6 +108,13 @@ A more hands-on example of how to use ofxPlaylist and a run-down of its key feat
 <pre>
 example/ofxPlaylistExample
 </pre>
+
+## Reference Render
+
+This is a screenshot of the included example project. At every click, a random rectangle gets animated.
+
+![image](http://poniesandlight.co.uk/static/ofxPlaylistReference.png)
+
 
 ## Dependencies:
 
