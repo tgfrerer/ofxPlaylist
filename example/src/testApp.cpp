@@ -90,9 +90,11 @@ void testApp::mouseReleased(int x, int y, int button){
 	
 	pRect->playlist.addKeyFrame(Action::event(pRect,"START1"));
 	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->pos.y, ofRandomuf()*ofGetHeight(), TWEEN_QUAD, TWEEN_EASE_OUT));
+	pRect->playlist.addToKeyFrame(Action::tween(50,50, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
 	// addToKeyframe will add the Keyframe so that it is executed in paralell with the last added Keyframe
-	pRect->playlist.addToKeyFrame(Action::tween(50,100, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
-
+	// note that this tween will be delayed by 50 frames and will then execute for another 50 frames, thus running as long as the first keyframe in the playlist.
+	
+	
 	pRect->playlist.addKeyFrame(Action::event(this,"END1"));
 
 	// chain syntax example
