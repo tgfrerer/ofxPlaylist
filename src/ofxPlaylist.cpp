@@ -166,7 +166,7 @@ void ofxPlaylist::clear(){
 
 void ofxPlaylist::attach(){
 	if (!isAttached) {
-		ofAddListener(ofEvents.update, this, &ofxPlaylist::update);
+		ofAddListener(ofEvents().update, this, &ofxPlaylist::update);
 		isAttached = TRUE;
 	}
 }
@@ -175,7 +175,7 @@ void ofxPlaylist::attach(){
 
 void ofxPlaylist::detach(){
 	if (isAttached) {
-		ofRemoveListener(ofEvents.update, this, &ofxPlaylist::update);
+		ofRemoveListener(ofEvents().update, this, &ofxPlaylist::update);
 		isAttached = FALSE;
 	}
 
