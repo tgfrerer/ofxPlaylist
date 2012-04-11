@@ -151,7 +151,8 @@ void ofxKeyframe::start(){
 // ----------------------------------------------------------------------
 
 void ofxKeyframe::fetchTargets(){
-	cout << "   fetching targets: "<< step << "/" << steps << "+" << delay_steps << endl;
+	// cout << "   fetching targets: "<< step << "/" << steps << "+" << delay_steps << endl;
+
 	// get current animatedObject's start value by dereferencing the given start value pointer.
 	if (start_pos_p != NULL)	// is NULL in case TWEEN_PAUSE
 		start_pos = *start_pos_p;
@@ -205,7 +206,7 @@ void ofxKeyframe::execute(){
 		step = isFrameBased ? labs(startValue) : labs(ofGetSystemTime() - startValue);
 		if (isFrameBased) startValue++;		// increase frame count if the animation is by-frame
 		
-		cout << "tweening: "<< step << "/" << steps << "+" << delay_steps << endl;
+		// cout << "tweening: "<< step << "/" << steps << "+" << delay_steps << endl;
 
 		if (delayHasEnded()) fetchTargets();	// will only return TRUE the first time.
 		
