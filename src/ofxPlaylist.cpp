@@ -217,7 +217,7 @@ bool ofxPlaylist::doNext(){
 				return TRUE;
 			}
 
-			_r &= currentKeyframe[i]->is_idle;			// &= means, if even one of the result values differs from the initial _r value, _r will be false
+			_r &= currentKeyframe[i]->is_idle;			// &= means, if just one of the result values differs from the initial _r value, _r will be false
 		}
 		// make sure the caller of this function sets anim_idle to the return value _r!
 

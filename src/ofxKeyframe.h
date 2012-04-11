@@ -54,13 +54,7 @@ namespace Playlist {
 		,outSpeed(0.f){}
 		
 		float getAt(float t){
-			float _r = ofBezierPoint(p1, pc1, pc2, p2, t).y;
-
-			// make sure that the 
-			
-//			ofLog(OF_LOG_NOTICE) << "_r: " << _r;
-			
-			return _r;
+			return ofBezierPoint(p1, pc1, pc2, p2, t).y;
 		};
 		
 		

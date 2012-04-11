@@ -33,6 +33,7 @@ enum TweenTransition{
 class ofxBaseKeyframe {
 public:
 	ofxBaseKeyframe(){};
+
 	virtual ~ofxBaseKeyframe(){ 
 #ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": ~ofxKeyFrame();";
@@ -42,10 +43,11 @@ public:
 		   // the derived class - and not for the parent class!
 	
 	bool is_idle;
-	TweenTransition tween_transition;        // the type of keyframe transition (TWEEN_SIN, etc.)
+	TweenTransition tween_transition;        
 	
-	virtual void execute()=0;  // this function needs to be set in all inheriting classes!
 	virtual void start(){};
+	virtual void execute()=0;  
+
 	virtual int getDuration()=0;
 
 	bool hasStarted;
