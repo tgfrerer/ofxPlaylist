@@ -9,12 +9,11 @@ void testApp::setup(){
 	
 	ofxKeyframeAnimRegisterEvents(this);
 	
-for (int i=0; i<20; i++) {
-	animatedRectangles.push_back(new AnimatedRectangle());
-	// animatedRectangles[i]->playlist.attach();	
-	ofxKeyframeAnimRegisterEvents(animatedRectangles[i]);
-
-}	
+	for (int i=0; i<20; i++) {
+		animatedRectangles.push_back(new AnimatedRectangle());
+		// animatedRectangles[i]->playlist.attach();	
+		ofxKeyframeAnimRegisterEvents(animatedRectangles[i]);
+	}	
 	
 	// masterPlaylist.attach();
 	
@@ -92,14 +91,16 @@ void testApp::mouseReleased(int x, int y, int button){
 	pRect->playlist.addKeyFrame(Action::event(pRect,"START1"));
 	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->pos.y, ofRandomuf()*ofGetHeight(), TWEEN_QUAD, TWEEN_EASE_OUT));
 	// addToKeyframe will add the Keyframe so that it is executed in paralell with the last added Keyframe
-	pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
+	pRect->playlist.addToKeyFrame(Action::tween(50,100, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
+
+	pRect->playlist.addKeyFrame(Action::event(this,"END1"));
 
 	// chain syntax example
 	pRect->playlist.addKeyFrame(Action::event(this,"START2"))
 				   .addKeyFrame(Action::event(this,"START3"))
 				   .addKeyFrame(Action::pause(0));
 
-	pRect->playlist.addKeyFrame(Action::event(this,"START5"));
+	pRect->playlist.addKeyFrame(Action::event(this,"START4"));
 	// pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));
 
 	// let's use funky bezier curves!

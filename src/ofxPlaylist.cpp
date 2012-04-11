@@ -256,7 +256,7 @@ void ofxPlaylist::savePlaylistCurrentlyInBufferToInternalMap(string playlistName
 void ofxPlaylist::saveAndInitialiseTargetsAndClear(string playlistName){
 
 	// this will set all ofxPlaylist target values to their initial state
-	// but then we instantly clear the playlists, so that the animation will only be running if we call queueAnimations().
+	// but then we instantly clear the playlists, so that the animation will only be running if we call replacePlaylistCurrentlyInBufferWithPlaylistFromInternalMap().
 
 	savePlaylistCurrentlyInBufferToInternalMap(playlistName);
 	update();

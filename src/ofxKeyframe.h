@@ -115,19 +115,19 @@ class ofxKeyframe : public ofxBaseKeyframe {
 	
 public:
 	
-	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const int& _frames);
-	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const float& _millisecs);
+	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const int& _frames, const int& _frames_delay=0);
+	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, const float& _end, const float& _millisecs, const float& _millisecs_delay=0);
 
-	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _frames);
-	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const float& _millisecs);
+	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _frames, const int& _frames_delay=0);
+	ofxKeyframe(ofxEasing* _easingP, float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const float& _millisecs, const float& _millisecs_delay=0);
 
 	// bezier curve
 	
-	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const int& _frames);
-	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const float& _millisecs);
+	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const int& _frames, const int& _frames_delay=0);
+	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const float& _millisecs, const float& _millisecs_delay=0);
 
-	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float * _start, const float& _end, const int& _frames);
-	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float * _start, const float& _end, const float& _millisecs);
+	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float * _start, const float& _end, const int& _frames, const int& _frames_delay=0);
+	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float * _start, const float& _end, const float& _millisecs, const float& _millisecs_delay=0);
 	
 	
 	// Pause
@@ -156,12 +156,16 @@ private:
 	
 	bool isFrameBased;
 	bool isBezierCurveBased;
+	bool isDelayed;
 	
 	ofxEasing* easingP;
 	ofPtr<Playlist::BezierTween> pEasingC;
 	
 	void initofxKeyframe();
-	void setup(float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _steps);
+	void setup(float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _steps, const int& _delay_steps);
+	
+	void fetchTargets();
+	bool delayHasEnded();
 	
 	// variables you need to save for every tween
 	float * pTweenTarget;
@@ -170,7 +174,8 @@ private:
 	float * start_pos_p;
 	float end_pos;  
 	int step;
-	int steps; 
+	int steps;
+	int delay_steps;
 	
 };
 

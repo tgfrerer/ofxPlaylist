@@ -94,7 +94,7 @@ namespace Playlist{
 		template <typename T>
 		static ofPtr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
 									const TweenType& tweenType = TWEEN_LIN, const TweenTransition& _tween_transition = TWEEN_EASE_IN_OUT, 
-									float* _start = NULL)
+									float* _start = NULL, const T& _delay_duration=0)
 		{
 			ofxEasing* easingP;
 			if (_start == NULL )				// if no special _start pointer is given, the initialisation value of _pTweenTarget is 
@@ -140,16 +140,25 @@ namespace Playlist{
 					break;
 			}
 			
-			return ofPtr<ofxKeyframe>(new ofxKeyframe(easingP, _pTweenTarget, _tween_transition, _start, _targetValue, _duration));
+			return ofPtr<ofxKeyframe>(new ofxKeyframe(easingP, _pTweenTarget, _tween_transition, _start, _targetValue, _duration, _delay_duration));
 		};
 
+		// this allows you to specify a delay before the tween duration in a more friendly notation
+		template <typename T>
+		static ofPtr<ofxKeyframe> tween(const T& _delay_duration, const T& _duration, float* _pTweenTarget, const float& _targetValue, 
+										const TweenType& tweenType = TWEEN_LIN, const TweenTransition& _tween_transition = TWEEN_EASE_IN_OUT, 
+										float* _start = NULL)
+		{
+			return tween(_duration, _pTweenTarget, _targetValue, tweenType, _tween_transition, _start, _delay_duration);
+		}
+		
 		// ------- 
 		// bezier curve based:
 		
 		template <typename T>
 		static ofPtr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
 										const ofPtr<BezierTween> _BezierTween, 
-										float* _start = NULL)
+										float* _start = NULL, const T& _delay_duration=0)
 		{
 			ofxEasing* easingP = NULL;
 			if (_start == NULL )				// if no special _start pointer is given, the initialisation value of _pTweenTarget is 
@@ -157,7 +166,16 @@ namespace Playlist{
 												// otherwise the value pointed to by _start is used as initialisation value for _pTweenTarget
 												// the moment the Tween gets executed for the first time.
 			
-			return ofPtr<ofxKeyframe>(new ofxKeyframe(_BezierTween, _pTweenTarget, _start, _targetValue, _duration));
+			return ofPtr<ofxKeyframe>(new ofxKeyframe(_BezierTween, _pTweenTarget, _start, _targetValue, _duration, _delay_duration));
+		};
+
+		// this allows you to specify a delay before the tween duration in a more friendly notation
+		template <typename T>
+		static ofPtr<ofxKeyframe> tween(const T& _delay_duration, const T& _duration, float* _pTweenTarget, const float& _targetValue, 
+										const ofPtr<BezierTween> _BezierTween, 
+										float* _start = NULL)
+		{
+			return tween(_duration, _pTweenTarget, _targetValue, _BezierTween, _start, _delay_duration);
 		};
 
 		
