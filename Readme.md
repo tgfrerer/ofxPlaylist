@@ -2,7 +2,7 @@
      _____    ___     
     /    /   /  /     ofxPlaylist
    /  __/ * /  /__    (c) ponies & light, 2009-2012. 
-  /__/     /_____/    oo43.com
+  /__/     /_____/    poniesandlight.co.uk
 
   ofxPlaylist
   Created by Tim Gfrerer 2009-2012.

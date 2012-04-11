@@ -72,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2278D2551535CA120070CBF3 /* ofxPlaylistAEHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPlaylistAEHelper.h; sourceTree = "<group>"; };
 		229B7E4014289BC000739DB0 /* animated_rectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animated_rectangle.h; sourceTree = "<group>"; };
 		229B7E4314289BD200739DB0 /* ofxEasingExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxEasingExt.h; sourceTree = "<group>"; };
 		229B7E4414289BD200739DB0 /* ofxEventKeyframe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxEventKeyframe.cpp; sourceTree = "<group>"; };
@@ -174,6 +175,7 @@
 				229B7E4814289BD200739DB0 /* ofxBaseKeyframe.h */,
 				229B7E4914289BD200739DB0 /* ofxKeyframe.cpp */,
 				229B7E4A14289BD200739DB0 /* ofxKeyframe.h */,
+				2278D2551535CA120070CBF3 /* ofxPlaylistAEHelper.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
