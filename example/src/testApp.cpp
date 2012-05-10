@@ -12,11 +12,8 @@ void testApp::setup(){
 	
 	for (int i=0; i<20; i++) {
 		animatedRectangles.push_back(new AnimatedRectangle());
-		// animatedRectangles[i]->playlist.attach();	
 		ofxKeyframeAnimRegisterEvents(animatedRectangles[i]);
 	}	
-	
-	// masterPlaylist.attach();
 	
 }
 
@@ -100,16 +97,16 @@ void testApp::mouseReleased(int x, int y, int button){
 	using namespace Playlist;
 	int index = int(ofRandom(animatedRectangles.size()));
 	
-	// first an elegant combined movement,
-
 
 	AnimatedRectangle * pRect = animatedRectangles[index];
 	
 	pRect->playlist.addKeyFrame(Action::event(pRect,"START1"));
 	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->pos.y, ofRandomuf()*ofGetHeight(), TWEEN_QUAD, TWEEN_EASE_OUT));
 	pRect->playlist.addToKeyFrame(Action::tween(50,50, &pRect->pos.x, ofRandomuf()*ofGetWidth(), TWEEN_QUAD, TWEEN_EASE_OUT));
+
 	// addToKeyframe will add the Keyframe so that it is executed in paralell with the last added Keyframe
-	// note that this tween will be delayed by 50 frames and will then execute for another 50 frames, thus running as long as the first keyframe in the playlist.
+	// note that this tween will be delayed by 50 frames and will then execute for another 50 frames, 
+	// thus running as long as the first keyframe in the playlist.
 	
 	
 	pRect->playlist.addKeyFrame(Action::event(this,"END1"));
@@ -120,7 +117,6 @@ void testApp::mouseReleased(int x, int y, int button){
 				   .addKeyFrame(Action::pause(0));
 
 	pRect->playlist.addKeyFrame(Action::event(this,"START4"));
-	// pRect->playlist.addToKeyFrame(Action::tween(100, &pRect->angle,  ofRandomuf()*360, TWEEN_SIN, TWEEN_EASE_IN_OUT));
 
 	// let's use funky bezier curves!
 	BezierTween * eC = new BezierTween();
@@ -136,8 +132,6 @@ void testApp::mouseReleased(int x, int y, int button){
 
 	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->angle,   ofRandomuf()*360, ofPtr<BezierTween>(eC)));
 	pRect->playlist.addKeyFrame(Action::event(this,"END"));
-
-	
 
 	ofLog(OF_LOG_VERBOSE) << "Duration: " << animatedRectangles[index]->playlist.duration;
 	

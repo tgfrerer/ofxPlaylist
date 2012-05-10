@@ -28,10 +28,6 @@
  * THE SOFTWARE.
  */
 
-// tig, 17.03:
-// now able to incorporate any ofxEasing-function
-// now compatible w/ frame-by-frame animations and able to link up with MPE
-
 
 #include "ofMain.h"
 #include "animated_rectangle.h"

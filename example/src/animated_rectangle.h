@@ -16,9 +16,6 @@
 class AnimatedRectangle {
 public:
 	ofxPlaylist playlist;
-
-	// todo: add ability to store a vector of pointers to values we might want
-	// to manipulate, so that we can export the playlist more easily.
 	
 	AnimatedRectangle(){		
 		pos=ofVec3f((ofGetWidth()-120)*ofRandomuf(),(ofGetHeight()-80)*ofRandomuf() ,0);
@@ -27,12 +24,11 @@ public:
 		angle = ofRandomuf() * 360.;
 	};
 	~AnimatedRectangle(){
-		// be a good lad and clean up after yourself.
+		// be nice and clean up after yourself.
 		playlist.clear();
 	};
 	
 	void draw(){
-		// ofLog(OF_LOG_VERBOSE, "Drawing AnimatedRectangle at pos: " + ofToString(pos.x) + "," + ofToString(pos.y) + "," + ofToString(pos.z));
 		glPushMatrix();{
 
 			glTranslatef(pos.x,pos.y,pos.z);
