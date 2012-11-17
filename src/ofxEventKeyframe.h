@@ -72,14 +72,35 @@ public:
 
 extern ofxPlaylistEvents ofxKeyframeEvents;
 
+namespace Playlist {
+	// friendlier API
+	// 
+	// register your class as a listener for the onKeyframe Event by calling:
+	//
+	// Playlist::addListenerForOnKeyframeEvent()
+	//
+	// Don't forget to then remove the listener in the destructor of your class.
+	
+
+		template<class ListenerClass>
+		void addListenerForOnKeyframeEvent(ListenerClass * listener){
+			ofAddListener(ofxKeyframeEvents.onKeyframe, listener, &ListenerClass::onKeyframe);
+		}
+		
+		template<class ListenerClass>
+		void removeListenerForOnKeyframeEvent(ListenerClass * listener){
+			ofRemoveListener(ofxKeyframeEvents.onKeyframe, listener, &ListenerClass::onKeyframe);
+		}
+}
+
 template<class ListenerClass>
 void ofxKeyframeAnimRegisterEvents(ListenerClass * listener){
-    ofAddListener(ofxKeyframeEvents.onKeyframe, listener, &ListenerClass::onKeyframe);
+	ofAddListener(ofxKeyframeEvents.onKeyframe, listener, &ListenerClass::onKeyframe);
 }
 
 template<class ListenerClass>
 void ofxKeyframeAnimUnRegisterEvents(ListenerClass * listener){
-    ofRemoveListener(ofxKeyframeEvents.onKeyframe, listener, &ListenerClass::onKeyframe);
+	ofRemoveListener(ofxKeyframeEvents.onKeyframe, listener, &ListenerClass::onKeyframe);
 }
 
 
