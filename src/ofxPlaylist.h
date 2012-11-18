@@ -100,6 +100,18 @@ namespace Playlist{
 			return ofPtr<ofxEventKeyframe>(new ofxEventKeyframe(_listener, _message));
 		};
 
+		template<class T>
+		static ofPtr<ofxEventKeyframe> event(int frameDelay_, T * _listener, string _message)
+		{
+			return ofPtr<ofxEventKeyframe>(new ofxEventKeyframe(frameDelay_, _listener, _message));
+		};
+	
+		template<class T>
+		static ofPtr<ofxEventKeyframe> event(float millisecDelay_, T * _listener, string _message)
+		{
+			return ofPtr<ofxEventKeyframe>(new ofxEventKeyframe(millisecDelay_, _listener, _message));
+		};
+
 		
 		template <typename T>
 		static ofPtr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 

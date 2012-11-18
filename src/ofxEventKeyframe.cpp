@@ -29,3 +29,53 @@
 #include "ofxEventKeyframe.h"
 
 ofxPlaylistEvents ofxKeyframeEvents;		// declare the extern as static
+
+// ----------------------------------------------------------------------
+
+void ofxEventKeyframe::start(){
+	is_idle = FALSE;     // bool value to give notice that the keyframe is done with.
+	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTime();
+	step = 0;
+	hasStarted = TRUE;
+};
+
+// ----------------------------------------------------------------------
+
+void ofxEventKeyframe::execute(){
+	// call the Event as soon as possible.
+	// call event here
+	if (is_idle == FALSE) {
+		
+		if (hasStarted == FALSE) start();
+		
+		step = isFrameBased ? labs(startValue) : labs(ofGetSystemTime() - startValue);
+		if (isFrameBased) startValue++;		// increase frame count if the animation is by-frame
+		
+		delayHasEnded();	// check whether delay has ended.
+		
+		if (isDelayed) return;
+		// ----------| invariant: delay has ended, we are ready to execute:
+		
+		ofxPlaylistEventArgs keyframeEventArgs;
+		keyframeEventArgs.message = message;
+		keyframeEventArgs.pSender = pSender;
+		// ofxCoreKeyframeEvents Ev;
+#ifdef PLAYLIST_DEBUG_MODE
+		ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": EventKeyframe calling event, passing message: " << message ;
+#endif
+		ofNotifyEvent(ofxKeyframeEvents.onKeyframe, keyframeEventArgs);
+		is_idle = TRUE;	// get rid of it.
+	}
+}
+
+// ----------------------------------------------------------------------
+
+bool ofxEventKeyframe::delayHasEnded() {
+	if (isDelayed && (step >= delay_steps)) {
+		isDelayed = false;
+		return true;
+	}
+	return false;
+};
+
+// ----------------------------------------------------------------------

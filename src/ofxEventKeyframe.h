@@ -107,39 +107,68 @@ void ofxKeyframeAnimUnRegisterEvents(ListenerClass * listener){
 // ------------------------------------
 
 class ofxEventKeyframe : public ofxBaseKeyframe {
+	string message;
+	void* pSender;
+	
+	bool isDelayed;
+	const int delay_steps;
+	
+	long startValue;
+	const bool isFrameBased;
+	int step;
+
+
 public:
 	
 	template<class ListenerClass>
-	ofxEventKeyframe(ListenerClass * listener, string _message){							// initialise with <#message#> .
-		is_idle = FALSE;     // bool value to give notice that the keyframe is done with.
+	ofxEventKeyframe(ListenerClass * listener, string _message)
+	: isDelayed (FALSE)
+	, delay_steps(0)
+	, startValue(0)
+	, isFrameBased(TRUE)
+	, step(0)
+	{							// initialise with message .
+		is_idle = FALSE;
+		hasStarted = FALSE;
+
 		message = _message;
 		pSender = listener;
 	};
 
-	void start(){
-		// do essentially nothing.
-	};	
-	void execute(){
-		// call the Event as soon as possible.
-		// call event here
-		if (is_idle == FALSE) {
-			ofxPlaylistEventArgs keyframeEventArgs;
-			keyframeEventArgs.message = message;
-			keyframeEventArgs.pSender = pSender;
-			// ofxCoreKeyframeEvents Ev;
-#ifdef PLAYLIST_DEBUG_MODE
-			ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": EventKeyframe calling event, passing message: " << message ;
-#endif
-			ofNotifyEvent(ofxKeyframeEvents.onKeyframe, keyframeEventArgs);
-		}
-		is_idle = TRUE;	// get rid of it.
+	template<class ListenerClass>
+	ofxEventKeyframe(float delayMillisecs, ListenerClass * listener, string _message)
+	: isDelayed (TRUE)
+	, delay_steps(delayMillisecs)
+	, startValue(0)
+	, isFrameBased(FALSE)
+	, step(0)
+	{							// initialise with  message.
+		is_idle = FALSE;
+		hasStarted = FALSE;
+		message = _message;
+		pSender = listener;
 	};
-	
-	int getDuration(){return 0;};
-	
-private:
-	string message;
-	void* pSender;
+
+	template<class ListenerClass>
+	ofxEventKeyframe(int delayFrames, ListenerClass * listener, string _message)
+	: isDelayed (TRUE)
+	, delay_steps(0)
+	, startValue(0)
+	, isFrameBased(TRUE)
+	, step(0)
+	{							// initialise with message .
+		is_idle = FALSE;
+		hasStarted = FALSE;
+		message = _message;
+		pSender = listener;
+	};
+
+	void start();
+	void execute();
+	bool delayHasEnded();
+	int getDuration()	{return delay_steps;};
+
+
 };
 
 
