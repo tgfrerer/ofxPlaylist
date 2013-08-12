@@ -26,7 +26,6 @@
  THE SOFTWARE.
 </pre>
 
-
 # ofxPlaylist
 
 A playlist-based animation library. Developed over a couple of years and used in a growing number of permanent installations, deployed on OS X, Windows and Linux.
@@ -39,6 +38,8 @@ Playlists hold a sequence of Keyframes, which either:
  
 Keyframes are cleared from their Playlist upon completion. Additional Keyframes can be pushed onto the end of any Playlist at any time. Playlists can also be cleared at any time, even from within a Keyframe Event triggered by a playlist itself.
 
+## Compatible with openFrameworks 0.8.0
+
 ## Key Features:
 
 * Tweens using any of Robert Penner' functions via ofxTween
@@ -47,7 +48,7 @@ Keyframes are cleared from their Playlist upon completion. Additional Keyframes 
 * Internal memory management using ofPtr()
 * Keyframes can be set to execute in sequence or in parallel
 * Calculate total remaining duration of Playlist
-* NEW: Tweens follwing Bézier curves, mirroring the functionality of Adobe After Effects temporal timeline curves.
+* Tweens follwing Bézier curves, mirroring the functionality of Adobe After Effects temporal timeline curves.
 
 ## Use:
 
