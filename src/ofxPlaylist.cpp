@@ -198,6 +198,9 @@ bool ofxPlaylist::doNext(){
 
 	// don't do anything if you are requested to clear.
 	if (bShouldClear == true) return FALSE;
+	
+	// on a very fast application this can be empty
+	if (playlist.size() < 1) return FALSE;
 
 	for (int i=0; i<playlist.front()->size(); i++) {
 		// reset keyframe is_idle value, just in case it has been stored for re-use.
