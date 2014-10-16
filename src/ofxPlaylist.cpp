@@ -44,14 +44,14 @@
 // ----------------------------------------------------------------------
 
 
-ofxPlaylist& ofxPlaylist::addKeyFrame(ofPtr<ofxBaseKeyframe> _action){
+ofxPlaylist& ofxPlaylist::addKeyFrame(shared_ptr<ofxBaseKeyframe> _action){
 	// tim-debug: this function was leaking memory like a whole geriatric ward!
-	// no more. ofPtr to the rescue.
+	// no more. shared_ptr to the rescue.
 
 	lastDuration = _action->getDuration();
 	duration += lastDuration;
 
-	playlistBuffer.push_back(ofPtr<Keyframe> (new Keyframe()));
+	playlistBuffer.push_back(shared_ptr<Keyframe> (new Keyframe()));
 
 	// add keyframe to the playlistBuffer
 	playlistBuffer.back()->push_back(_action);
@@ -62,7 +62,7 @@ ofxPlaylist& ofxPlaylist::addKeyFrame(ofPtr<ofxBaseKeyframe> _action){
 
 // ----------------------------------------------------------------------
 
-ofxPlaylist& ofxPlaylist::addToKeyFrame(ofPtr<ofxBaseKeyframe> _action){
+ofxPlaylist& ofxPlaylist::addToKeyFrame(shared_ptr<ofxBaseKeyframe> _action){
 	// get the last element of the queue
 
 	if (playlistBuffer.empty()){
@@ -159,7 +159,7 @@ void ofxPlaylist::clear(){
 #ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << "Clearing ofxPlaylist.playlist";
 #endif
-		playlist.clear(); 					// aah...... the beauty of ofPtr<>
+		playlist.clear(); 					// aah...... the beauty of shared_ptr<>
 		bShouldClear = false;
 		playlistMutex.unlock();
 	} else {
@@ -280,7 +280,7 @@ void ofxPlaylist::saveAndInitialiseTargetsAndClear(string playlistName){
 
 void ofxPlaylist::replacePlaylistCurrentlyInBufferWithPlaylistFromInternalMap(string playlistName){
 	
-	map<string, deque<ofPtr<Keyframe> > >::iterator it = savedPlaylists.find(playlistName);
+	map<string, deque<shared_ptr<Keyframe> > >::iterator it = savedPlaylists.find(playlistName);
 	
 	if (it != savedPlaylists.end()){
 		// we have found a saved playlist with this name!

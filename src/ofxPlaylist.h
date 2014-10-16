@@ -95,26 +95,26 @@ namespace Playlist{
 		 // MARK: - Static Factory functions
 
 		template<class T>
-		static ofPtr<ofxEventKeyframe> event(T * _listener, string _message)
+		static shared_ptr<ofxEventKeyframe> event(T * _listener, string _message)
 		{
-			return ofPtr<ofxEventKeyframe>(new ofxEventKeyframe(_listener, _message));
+			return shared_ptr<ofxEventKeyframe>(new ofxEventKeyframe(_listener, _message));
 		};
 
 		template<class T>
-		static ofPtr<ofxEventKeyframe> event(int frameDelay_, T * _listener, string _message)
+		static shared_ptr<ofxEventKeyframe> event(int frameDelay_, T * _listener, string _message)
 		{
-			return ofPtr<ofxEventKeyframe>(new ofxEventKeyframe(frameDelay_, _listener, _message));
+			return shared_ptr<ofxEventKeyframe>(new ofxEventKeyframe(frameDelay_, _listener, _message));
 		};
 	
 		template<class T>
-		static ofPtr<ofxEventKeyframe> event(float millisecDelay_, T * _listener, string _message)
+		static shared_ptr<ofxEventKeyframe> event(float millisecDelay_, T * _listener, string _message)
 		{
-			return ofPtr<ofxEventKeyframe>(new ofxEventKeyframe(millisecDelay_, _listener, _message));
+			return shared_ptr<ofxEventKeyframe>(new ofxEventKeyframe(millisecDelay_, _listener, _message));
 		};
 
 		
 		template <typename T>
-		static ofPtr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
+		static shared_ptr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
 									const TweenType& tweenType = TWEEN_LIN, const TweenTransition& _tween_transition = TWEEN_EASE_IN_OUT, 
 									float* _start = NULL, const T& _delay_duration=0)
 		{
@@ -162,12 +162,12 @@ namespace Playlist{
 					break;
 			}
 			
-			return ofPtr<ofxKeyframe>(new ofxKeyframe(easingP, _pTweenTarget, _tween_transition, _start, _targetValue, _duration, _delay_duration));
+			return shared_ptr<ofxKeyframe>(new ofxKeyframe(easingP, _pTweenTarget, _tween_transition, _start, _targetValue, _duration, _delay_duration));
 		};
 
 		// this allows you to specify a delay before the tween duration in a more friendly notation
 		template <typename T>
-		static ofPtr<ofxKeyframe> tween(const T& _delay_duration, const T& _duration, float* _pTweenTarget, const float& _targetValue, 
+		static shared_ptr<ofxKeyframe> tween(const T& _delay_duration, const T& _duration, float* _pTweenTarget, const float& _targetValue, 
 										const TweenType& tweenType = TWEEN_LIN, const TweenTransition& _tween_transition = TWEEN_EASE_IN_OUT, 
 										float* _start = NULL)
 		{
@@ -178,8 +178,8 @@ namespace Playlist{
 		// bezier curve based:
 		
 		template <typename T>
-		static ofPtr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
-										const ofPtr<BezierTween> _BezierTween, 
+		static shared_ptr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
+										const shared_ptr<BezierTween> _BezierTween, 
 										float* _start = NULL, const T& _delay_duration=0)
 		{
 			ofxEasing* easingP = NULL;
@@ -188,13 +188,13 @@ namespace Playlist{
 												// otherwise the value pointed to by _start is used as initialisation value for _pTweenTarget
 												// the moment the Tween gets executed for the first time.
 			
-			return ofPtr<ofxKeyframe>(new ofxKeyframe(_BezierTween, _pTweenTarget, _start, _targetValue, _duration, _delay_duration));
+			return shared_ptr<ofxKeyframe>(new ofxKeyframe(_BezierTween, _pTweenTarget, _start, _targetValue, _duration, _delay_duration));
 		};
 
 		// this allows you to specify a delay before the tween duration in a more friendly notation
 		template <typename T>
-		static ofPtr<ofxKeyframe> tween(const T& _delay_duration, const T& _duration, float* _pTweenTarget, const float& _targetValue, 
-										const ofPtr<BezierTween> _BezierTween, 
+		static shared_ptr<ofxKeyframe> tween(const T& _delay_duration, const T& _duration, float* _pTweenTarget, const float& _targetValue, 
+										const shared_ptr<BezierTween> _BezierTween, 
 										float* _start = NULL)
 		{
 			return tween(_duration, _pTweenTarget, _targetValue, _BezierTween, _start, _delay_duration);
@@ -204,9 +204,9 @@ namespace Playlist{
 		// ----------		
 		// allows int or float, but does no checks for other, more exotic types, so be careful.
 		template <typename T>
-		static ofPtr<ofxKeyframe> pause(T pause)
+		static shared_ptr<ofxKeyframe> pause(T pause)
 		{
-			return ofPtr<ofxKeyframe>(new ofxKeyframe(pause));
+			return shared_ptr<ofxKeyframe>(new ofxKeyframe(pause));
 		};
 		
 	}
@@ -217,7 +217,7 @@ namespace Playlist{
 
 class ofxPlaylist {
 public:
-	typedef vector<ofPtr<ofxBaseKeyframe > > Keyframe;
+	typedef vector<shared_ptr<ofxBaseKeyframe > > Keyframe;
 	bool anim_idle;              // whether the current ofxPlaylist is animating
     int duration;
 	
@@ -246,8 +246,8 @@ public:
 	void update();  
 	
 	
-	ofxPlaylist& addKeyFrame(ofPtr<ofxBaseKeyframe> _action);
-	ofxPlaylist& addToKeyFrame(ofPtr<ofxBaseKeyframe> _action);
+	ofxPlaylist& addKeyFrame(shared_ptr<ofxBaseKeyframe> _action);
+	ofxPlaylist& addToKeyFrame(shared_ptr<ofxBaseKeyframe> _action);
 	
 	void savePlaylistCurrentlyInBufferToInternalMap(string playlistName);
 	void saveAndInitialiseTargetsAndClear(string playlistName);
@@ -259,10 +259,10 @@ public:
 private:
 	
 	ofMutex playlistMutex;
-	deque<ofPtr<Keyframe> > playlist;
-	deque<ofPtr<Keyframe> > playlistBuffer;
+	deque<shared_ptr<Keyframe> > playlist;
+	deque<shared_ptr<Keyframe> > playlistBuffer;
 	
-	map<string, deque<ofPtr<Keyframe> > > savedPlaylists;
+	map<string, deque<shared_ptr<Keyframe> > > savedPlaylists;
 	
 	int lastDuration;
 	bool isAttached;

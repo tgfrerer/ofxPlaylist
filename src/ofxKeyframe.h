@@ -129,11 +129,11 @@ public:
 
 	// bezier curve
 	
-	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const int& _frames, const int& _frames_delay=0);
-	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const float& _millisecs, const float& _millisecs_delay=0);
+	ofxKeyframe(shared_ptr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const int& _frames, const int& _frames_delay=0);
+	ofxKeyframe(shared_ptr<Playlist::BezierTween> _easingC, float * _pTweenTarget, const float& _end, const float& _millisecs, const float& _millisecs_delay=0);
 
-	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float * _start, const float& _end, const int& _frames, const int& _frames_delay=0);
-	ofxKeyframe(ofPtr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float * _start, const float& _end, const float& _millisecs, const float& _millisecs_delay=0);
+	ofxKeyframe(shared_ptr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float * _start, const float& _end, const int& _frames, const int& _frames_delay=0);
+	ofxKeyframe(shared_ptr<Playlist::BezierTween> _easingC, float * _pTweenTarget, float * _start, const float& _end, const float& _millisecs, const float& _millisecs_delay=0);
 	
 	
 	// Pause
@@ -165,7 +165,7 @@ private:
 	bool isDelayed;
 	
 	ofxEasing* easingP;
-	ofPtr<Playlist::BezierTween> pEasingC;
+	shared_ptr<Playlist::BezierTween> pEasingC;
 	
 	void initofxKeyframe();
 	void setup(float * _pTweenTarget, const TweenTransition& _tween_transition, float * _start, const float& _end, const int& _steps, const int& _delay_steps);
