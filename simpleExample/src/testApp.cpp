@@ -71,8 +71,8 @@ void testApp::mouseReleased(int x, int y, int button){
 	
 	ofVec3f targetPosition = ofVec3f(x, y);
 	
-	// (1) take 1000ms to move to random target point on x axis,
-	// (2) wait 500ms, then take 500ms to move to random target point on y axis
+	// (1) take 200ms to move to the mouse position on x axis,
+	// (2) take 200ms to move to the mouse position on y axis in sync with x.
 	
 	mainPlaylist.addKeyFrame(	Action::tween(200.f, &rectPos.x, targetPosition.x));		// -- (1)
 	mainPlaylist.addToKeyFrame(	Action::tween(200.f, &rectPos.y, targetPosition.y));		// -- (2)
