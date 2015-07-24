@@ -86,7 +86,7 @@ ofxPlaylist& ofxPlaylist::addToKeyFrame(shared_ptr<ofxBaseKeyframe> _action){
 
 void ofxPlaylist::update(){
 
-	if (playlistMutex.tryLock()){
+	if (playlistMutex.try_lock()){
 		playlistMutex.unlock();
 	} else {
 		ofLog(OF_LOG_FATAL_ERROR) << "Did you just try to update a playlist from within an event?. Recursive updates, or what? That's forbidden.";
@@ -155,7 +155,7 @@ void ofxPlaylist::update(){
 // ----------------------------------------------------------------------
 
 void ofxPlaylist::clear(){
-	if(playlistMutex.tryLock()){
+	if(playlistMutex.try_lock()){
 #ifdef PLAYLIST_DEBUG_MODE
 		ofLog(OF_LOG_VERBOSE) << "Clearing ofxPlaylist.playlist";
 #endif
@@ -303,9 +303,8 @@ ofxPlaylist::~ofxPlaylist(){
 #endif
 		detach();
 		bShouldClear = true;
-		if (playlistMutex.tryLock(50)){			// allow for a grace period of 50ms
-												// before clearing, just in case
-												// the object gets destroyed while the mutex is under lock.
+		if (playlistMutex.try_lock()){			// just in case
+												// the object gets destroyed while the mutex is locked.
 			clear();
 		}
 		playlistMutex.unlock();					// unlock the mutex regardless of what happens.
