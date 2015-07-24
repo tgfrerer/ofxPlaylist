@@ -1,11 +1,11 @@
 <pre>
      _____    ___     
     /    /   /  /     ofxPlaylist
-   /  __/ * /  /__    (c) ponies & light, 2009-2012. 
+   /  __/ * /  /__    (c) ponies & light, 2009-2015. 
   /__/     /_____/    poniesandlight.co.uk
 
   ofxPlaylist
-  Created by Tim Gfrerer 2009-2012.
+  Created by Tim Gfrerer 2009-2015.
   
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ Playlists hold a sequence of Keyframes, which either:
  
 Keyframes are cleared from their Playlist upon completion. Additional Keyframes can be pushed onto the end of any Playlist at any time. Playlists can also be cleared at any time, even from within a Keyframe Event triggered by a playlist itself.
 
-## Compatible with openFrameworks 0.8.0
+## Compatible with openFrameworks 0.9.0
 
 ## Key Features:
 
