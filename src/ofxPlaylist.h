@@ -49,17 +49,17 @@
 
 // ----------------------------------------------------------------------
 
-#include "ofxEasingBack.h"
-#include "ofxEasingBounce.h"
-#include "ofxEasingCirc.h"
-#include "ofxEasingCubic.h"
-#include "ofxEasingElastic.h"
-#include "ofxEasingExpo.h"
-#include "ofxEasingLinear.h"
-#include "ofxEasingQuad.h"
-#include "ofxEasingQuart.h"
-#include "ofxEasingQuint.h"
-#include "ofxEasingSine.h"
+#include "Easings/ofxEasingBack.h"
+#include "Easings/ofxEasingBounce.h"
+#include "Easings/ofxEasingCirc.h"
+#include "Easings/ofxEasingCubic.h"
+#include "Easings/ofxEasingElastic.h"
+#include "Easings/ofxEasingExpo.h"
+#include "Easings/ofxEasingLinear.h"
+#include "Easings/ofxEasingQuad.h"
+#include "Easings/ofxEasingQuart.h"
+#include "Easings/ofxEasingQuint.h"
+#include "Easings/ofxEasingSine.h"
 
 namespace Playlist{
 

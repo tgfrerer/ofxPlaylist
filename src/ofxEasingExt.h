@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ofxEasing.h"
+#include "Easings/ofxEasing.h"
 
 /*    _____    ___     
  *   /    /   /  /     ofxPlaylist
