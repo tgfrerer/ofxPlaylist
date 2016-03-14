@@ -1,5 +1,5 @@
-#ifndef EASING_H_
-#define EASING_H_
+#ifndef EASINGS_H_
+#define EASINGS_H_
 
 class ofxEasingArgs{
 public:
