@@ -132,10 +132,13 @@ void ofxPlaylist::update(){
 				anim_idle = FALSE;
 			}
 
+			// fixme: this is not yet correct for millisec durations
 			if (duration > 0)
 				duration--;
 
 		}
+	} else {
+		anim_idle = true;
 	}
 
 	playlistMutex.unlock();

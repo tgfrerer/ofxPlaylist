@@ -218,8 +218,6 @@ namespace Playlist{
 class ofxPlaylist {
 public:
 	typedef vector<shared_ptr<ofxBaseKeyframe > > Keyframe;
-	bool anim_idle;              // whether the current ofxPlaylist is animating
-    int duration;
 	
 	ofxPlaylist()
 	:anim_idle(TRUE)
@@ -253,11 +251,15 @@ public:
 	void saveAndInitialiseTargetsAndClear(string playlistName);
 	void replacePlaylistCurrentlyInBufferWithPlaylistFromInternalMap(string playlistName);
 
+	bool getIdle() {return anim_idle; };
+	int  getDuration() {return duration; }; //< note this is most certainly wrong if not all keyframes are frame-based.
 	
 	// -----------------------------------------------------------------------------
 	// MARK: Private methods
 private:
-	
+	bool anim_idle;              // whether the current ofxPlaylist is animating
+	int duration;
+
 	ofMutex playlistMutex;
 	deque<shared_ptr<Keyframe> > playlist;
 	deque<shared_ptr<Keyframe> > playlistBuffer;
