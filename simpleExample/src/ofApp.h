@@ -32,7 +32,7 @@
 #include "ofMain.h"
 #include "ofxPlaylist.h"
 
-class testApp : public ofBaseApp{
+class ofApp : public ofBaseApp{
 
 	ofxPlaylist mainPlaylist;
 	

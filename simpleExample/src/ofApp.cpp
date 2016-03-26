@@ -1,8 +1,8 @@
-#include "testApp.h"
+#include "ofApp.h"
 
 
 //--------------------------------------------------------------
-void testApp::setup(){
+void ofApp::setup(){
 	ofSetLogLevel(OF_LOG_VERBOSE);
 	ofSetFrameRate(60);
 	ofSetVerticalSync(TRUE);
@@ -13,56 +13,56 @@ void testApp::setup(){
 }
 
 //--------------------------------------------------------------
-void testApp::update(){
+void ofApp::update(){
 
 	// this will update all values controlled by mainPlaylist. 
 	// to see which values are controlled by mainPlaylist, 
-	// jump to testApp::mouseReleased(), which is where the
+	// jump to ofApp::mouseReleased(), which is where the
 	// playlist is set up.
 	
 	mainPlaylist.update();
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
+void ofApp::draw(){
 	
 	ofColor(128);
 	
 	ofPushMatrix();
 	ofTranslate(rectPos);
 	ofRotateZ(rectRotation);
-	ofRect(0,0, 200, 100);
+	ofDrawRectangle(0,0, 200, 100);
 	ofPopMatrix();
 
 }
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key){
+void ofApp::keyPressed(int key){
 
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key){
+void ofApp::keyReleased(int key){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
+void ofApp::mouseMoved(int x, int y ){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
+void ofApp::mouseReleased(int x, int y, int button){
 
 	using namespace Playlist;
 	
@@ -89,16 +89,16 @@ void testApp::mouseReleased(int x, int y, int button){
 }
 
 //--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
+void ofApp::windowResized(int w, int h){
 
 }
 
 //--------------------------------------------------------------
-void testApp::gotMessage(ofMessage msg){
+void ofApp::gotMessage(ofMessage msg){
 
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
