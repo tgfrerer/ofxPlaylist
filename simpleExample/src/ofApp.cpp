@@ -21,6 +21,7 @@ void ofApp::update(){
 	// playlist is set up.
 	
 	mainPlaylist.update();
+	
 }
 
 //--------------------------------------------------------------
@@ -76,13 +77,14 @@ void ofApp::mouseReleased(int x, int y, int button){
 	
 	mainPlaylist.addKeyFrame(	Action::tween(200.f, &rectPos.x, targetPosition.x));		// -- (1)
 	mainPlaylist.addToKeyFrame(	Action::tween(200.f, &rectPos.y, targetPosition.y));		// -- (2)
+	mainPlaylist.addKeyFrame(Action::event([this](){ ofLogNotice() << "event 1: " << rectPos; }));
 	
 	// pause for 200 ms - you will only notice this if you click repeatedly.
 	// mainPlaylist.addKeyFrame(Action::pause(200.f));
 
 	// wobble slightly once target position reached.
 	mainPlaylist.addKeyFrame(Action::tween(1000.f, &rectRotation, ofRandomf()*90, TWEEN_BOUNCE, TWEEN_EASE_OUT));
-
+	mainPlaylist.addKeyFrame(Action::event([this](){ ofLogNotice() << "event 2: " << rectPos; }));
 	// --> try other TWEEN_ variations with the above- it's fun!
 	// --> try other TWEEN_EASE_ variations with the above - it's geeky!
 	
