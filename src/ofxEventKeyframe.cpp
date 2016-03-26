@@ -79,3 +79,52 @@ bool ofxEventKeyframe::delayHasEnded() {
 };
 
 // ----------------------------------------------------------------------
+
+
+// ----------------------------------------------------------------------
+
+void ofxLambdaKeyframe::start(){
+	is_idle = FALSE;     // bool value to give notice that the keyframe is done with.
+	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTime();
+	step = 0;
+	hasStarted = TRUE;
+};
+
+// ----------------------------------------------------------------------
+
+void ofxLambdaKeyframe::execute(){
+	// call the Event as soon as possible.
+	// call event here
+	if (is_idle == FALSE) {
+		
+		if (hasStarted == FALSE) start();
+		
+		step = isFrameBased ? startValue : (ofGetSystemTime() - startValue);
+		if (isFrameBased) startValue++;		// increase frame count if the animation is by-frame
+		
+		delayHasEnded();	// check whether delay has ended.
+		
+		if (isDelayed) return;
+		// ----------| invariant: delay has ended, we are ready to execute:
+		
+#ifdef PLAYLIST_DEBUG_MODE
+		ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": Lambda keyframe executing function object: ";
+#endif
+
+		// execute function object
+		if (lambda)
+			lambda();
+		
+		is_idle = TRUE;	// get rid of it.
+	}
+}
+
+// ----------------------------------------------------------------------
+
+bool ofxLambdaKeyframe::delayHasEnded() {
+	if (isDelayed && (step >= delay_steps)) {
+		isDelayed = false;
+		return true;
+	}
+	return false;
+};

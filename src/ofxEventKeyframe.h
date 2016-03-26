@@ -30,7 +30,7 @@
 
 #include "ofMain.h"
 #include "ofxBaseKeyframe.h"
-
+#include <functional>
 
 
 /*	
@@ -117,7 +117,6 @@ class ofxEventKeyframe : public ofxBaseKeyframe {
 	const bool isFrameBased;
 	int step;
 
-
 public:
 	
 	template<class ListenerClass>
@@ -152,7 +151,7 @@ public:
 	template<class ListenerClass>
 	ofxEventKeyframe(int delayFrames, ListenerClass * listener, string _message)
 	: isDelayed (TRUE)
-	, delay_steps(0)
+	, delay_steps(delayFrames)
 	, startValue(0)
 	, isFrameBased(TRUE)
 	, step(0)
@@ -172,6 +171,58 @@ public:
 };
 
 
+class ofxLambdaKeyframe : public ofxBaseKeyframe {
+	bool       isDelayed;
+	const int  delay_steps;
+	long       startValue;
+	const bool isFrameBased;
+	int        step;
+	
+	std::function<void()> lambda;
+public:
+
+	ofxLambdaKeyframe(std::function<void()> f_)
+	: isDelayed (FALSE)
+	, delay_steps(0)
+	, startValue(0)
+	, isFrameBased(TRUE)
+	, step(0)
+	{
+		is_idle = FALSE;
+		hasStarted = FALSE;
+		lambda = f_;
+	};
+
+	ofxLambdaKeyframe(int delayFrames, std::function<void()> f_)
+	: isDelayed (TRUE)
+	, delay_steps(delayFrames)
+	, startValue(0)
+	, isFrameBased(TRUE)
+	, step(0)
+	{							// initialise with message .
+		is_idle = FALSE;
+		hasStarted = FALSE;
+		lambda = f_;
+	};
+
+	ofxLambdaKeyframe(float delayMillis, std::function<void()> f_)
+	: isDelayed (TRUE)
+	, delay_steps(delayMillis)
+	, startValue(0)
+	, isFrameBased(FALSE)
+	, step(0)
+	{
+		is_idle = FALSE;
+		hasStarted = FALSE;
+		lambda = f_;
+	};
+	
+	void start();
+	void execute();
+	bool delayHasEnded();
+	int getDuration()	{return delay_steps;};
+	
+};
 
 
 #endif

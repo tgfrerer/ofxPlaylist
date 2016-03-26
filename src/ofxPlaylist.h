@@ -112,6 +112,21 @@ namespace Playlist{
 			return shared_ptr<ofxEventKeyframe>(new ofxEventKeyframe(millisecDelay_, _listener, _message));
 		};
 
+		// lambda event factory methods
+
+		static shared_ptr<ofxLambdaKeyframe> event(std::function<void()> f_){
+			return make_shared<ofxLambdaKeyframe>(f_);
+		}
+
+		static shared_ptr<ofxLambdaKeyframe> event(int frameDelay, std::function<void()> f_){
+			return make_shared<ofxLambdaKeyframe>(frameDelay, f_);
+		}
+
+		static shared_ptr<ofxLambdaKeyframe> event(float millisecDelay, std::function<void()> f_){
+			return make_shared<ofxLambdaKeyframe>(millisecDelay, f_);
+		}
+
+		// -------
 		
 		template <typename T>
 		static shared_ptr<ofxKeyframe> tween(const T& _duration, float* _pTweenTarget, const float& _targetValue, 
