@@ -48,7 +48,7 @@ void ofxEventKeyframe::execute(){
 		
 		if (hasStarted == FALSE) start();
 		
-		step = isFrameBased ? labs(startValue) : labs(ofGetSystemTime() - startValue);
+		step = isFrameBased ? startValue : (ofGetSystemTime() - startValue);
 		if (isFrameBased) startValue++;		// increase frame count if the animation is by-frame
 		
 		delayHasEnded();	// check whether delay has ended.
