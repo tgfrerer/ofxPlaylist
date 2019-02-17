@@ -1,8 +1,8 @@
-#include "testApp.h"
+#include "ofApp.h"
 
 
 //--------------------------------------------------------------
-void testApp::setup(){
+void ofApp::setup(){
 	ofSetLogLevel(OF_LOG_VERBOSE);
 	ofSetFrameRate(60);
 	ofSetVerticalSync(TRUE);
@@ -18,7 +18,7 @@ void testApp::setup(){
 }
 
 //--------------------------------------------------------------
-void testApp::update(){
+void ofApp::update(){
 	vector<AnimatedRectangle *>::iterator it = animatedRectangles.begin();
 	
 	for (int i=0; i<20; i++) {
@@ -27,7 +27,7 @@ void testApp::update(){
 
 }
 
-void testApp::onKeyframe(ofxPlaylistEventArgs& args){
+void ofApp::onKeyframe(ofxPlaylistEventArgs& args){
 
 	// this check is only necessary if you want to be absolutely sure that 
 	// the onKeyFrame Event was sent by the same object as the receiver.
@@ -38,14 +38,14 @@ void testApp::onKeyframe(ofxPlaylistEventArgs& args){
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
+void ofApp::draw(){
 	
 
 	ofPushStyle();
 		ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
 		ofSetColor(0, 5);
 		ofFill();
-		ofRect(0,0,ofGetWidth(),ofGetHeight());
+		ofDrawRectangle(0,0,ofGetWidth(),ofGetHeight());
 	ofPopStyle();
 
 	ofEnableBlendMode(OF_BLENDMODE_SCREEN);
@@ -57,7 +57,7 @@ void testApp::draw(){
 	ofPushStyle();
 		ofDisableBlendMode();
 		ofSetColor(0,255);
-		ofRect(ofGetWidth()/2. - 4, ofGetHeight()/2. - 12, 120, 20);
+		ofDrawRectangle(ofGetWidth()/2. - 4, ofGetHeight()/2. - 12, 120, 20);
 		ofFill();	
 		ofSetColor(255);
 		ofDrawBitmapString(ofToString(ofGetFrameNum()) + ":" + ofToString(ofGetFrameRate()),ofPoint(ofGetWidth()/2.,ofGetHeight()/2.));
@@ -67,32 +67,32 @@ void testApp::draw(){
 }
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key){
+void ofApp::keyPressed(int key){
 
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key){
+void ofApp::keyReleased(int key){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
+void ofApp::mouseMoved(int x, int y ){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
+void ofApp::mouseReleased(int x, int y, int button){
 
 	using namespace Playlist;
 	int index = int(ofRandom(animatedRectangles.size()));
@@ -133,22 +133,21 @@ void testApp::mouseReleased(int x, int y, int button){
 	pRect->playlist.addKeyFrame(Action::tween(100, &pRect->angle,   ofRandomuf()*360, ofPtr<BezierTween>(eC)));
 	pRect->playlist.addKeyFrame(Action::event(this,"END"));
 
-	ofLog(OF_LOG_VERBOSE) << "Duration: " << animatedRectangles[index]->playlist.duration;
-	
+	ofLog(OF_LOG_VERBOSE) << "Duration: " << animatedRectangles[index]->playlist.getDuration();
 
 }
 
 //--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
+void ofApp::windowResized(int w, int h){
 
 }
 
 //--------------------------------------------------------------
-void testApp::gotMessage(ofMessage msg){
+void ofApp::gotMessage(ofMessage msg){
 
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
 }

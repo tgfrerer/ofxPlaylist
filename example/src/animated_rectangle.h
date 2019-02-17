@@ -37,7 +37,7 @@ public:
 			ofPushStyle();{
 				ofFill();
 				glColor4f(color.r/255., color.g/255., color.b/255., color.a/255.);
-				ofRect(ofVec3f(0),size.x,size.y);
+				ofDrawRectangle(ofVec3f(0),size.x,size.y);
 				
 			}
 			ofPopStyle();
