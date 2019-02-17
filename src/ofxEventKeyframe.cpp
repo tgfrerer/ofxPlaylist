@@ -34,7 +34,7 @@ ofxPlaylistEvents ofxKeyframeEvents;		// declare the extern as static
 
 void ofxEventKeyframe::start(){
 	is_idle = FALSE;     // bool value to give notice that the keyframe is done with.
-	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTime();
+	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTimeMillis();
 	step = 0;
 	hasStarted = TRUE;
 };
@@ -48,7 +48,7 @@ void ofxEventKeyframe::execute(){
 		
 		if (hasStarted == FALSE) start();
 		
-		step = isFrameBased ? startValue : (ofGetSystemTime() - startValue);
+		step = isFrameBased ? startValue : (ofGetSystemTimeMillis() - startValue);
 		if (isFrameBased) startValue++;		// increase frame count if the animation is by-frame
 		
 		delayHasEnded();	// check whether delay has ended.
@@ -85,7 +85,7 @@ bool ofxEventKeyframe::delayHasEnded() {
 
 void ofxLambdaKeyframe::start(){
 	is_idle = FALSE;     // bool value to give notice that the keyframe is done with.
-	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTime();
+	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTimeMillis();
 	step = 0;
 	hasStarted = TRUE;
 };
@@ -99,7 +99,7 @@ void ofxLambdaKeyframe::execute(){
 		
 		if (hasStarted == FALSE) start();
 		
-		step = isFrameBased ? startValue : (ofGetSystemTime() - startValue);
+		step = isFrameBased ? startValue : (ofGetSystemTimeMillis() - startValue);
 		if (isFrameBased) startValue++;		// increase frame count if the animation is by-frame
 		
 		delayHasEnded();	// check whether delay has ended.

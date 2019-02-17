@@ -150,7 +150,7 @@ void ofxKeyframe::start(){
 	ofLog(OF_LOG_VERBOSE) << ofToString(ofGetFrameNum()) << ": ofxKeyframe start";
 #endif
 	is_idle = FALSE;
-	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTime();
+	(isFrameBased) ? startValue = 0 : startValue = ofGetSystemTimeMillis();
 	step = 0;
 	hasStarted = TRUE;
 	isDelayed = TRUE;
@@ -211,7 +211,7 @@ void ofxKeyframe::execute(){
 		
 		// cout << "tw-execute: is_idle " << is_idle << endl;
 		
-		step = isFrameBased ? startValue : (ofGetSystemTime() - startValue);
+		step = isFrameBased ? startValue : (ofGetSystemTimeMillis() - startValue);
 		if (isFrameBased) startValue++;		// increase frame count if the animation is by-frame
 		
 		// cout << "tweening: "<< step << "/" << steps << "+" << delay_steps << endl;

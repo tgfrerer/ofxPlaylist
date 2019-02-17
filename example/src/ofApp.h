@@ -33,7 +33,7 @@
 #include "animated_rectangle.h"
 #include "ofxPlaylist.h"
 
-class testApp : public ofBaseApp{
+class ofApp : public ofBaseApp{
 
 	public:
 		void setup();
