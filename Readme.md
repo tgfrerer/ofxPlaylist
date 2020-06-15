@@ -48,7 +48,7 @@ Keyframes are cleared from their Playlist upon completion. Additional Keyframes 
 * Internal memory management using ofPtr()
 * Keyframes can be set to execute in sequence or in parallel
 * Calculate total remaining duration of Playlist
-* Tweens follwing Bézier curves, mirroring the functionality of Adobe After Effects temporal timeline curves.
+* Tweens following Bézier curves, mirroring the functionality of Adobe After Effects temporal timeline curves.
 
 ## Use:
 
